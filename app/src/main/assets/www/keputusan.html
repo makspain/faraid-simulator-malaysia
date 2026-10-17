@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="ms"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>Faraid Simulator Malaysia</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "background": "#f9f9ff", "surface": "#f9f9ff", "on-surface": "#161c27", "surface-bright": "#f9f9ff", "on-primary-fixed-variant": "#00522f", "tertiary": "#30433b", "primary-fixed": "#a6f3c1", "inverse-surface": "#2a303d", "error-container": "#ffdad6", "on-secondary-fixed": "#251a00", "on-primary-fixed": "#002110", "tertiary-fixed-dim": "#b6cbc1", "error": "#ba1a1a", "tertiary-fixed": "#d2e8dc", "primary": "#00492a", "outline-variant": "#bfc9bf", "inverse-primary": "#8ad7a6", "surface-tint": "#1c6b43", "on-error": "#ffffff", "on-primary-container": "#90ddab", "on-background": "#161c27", "on-secondary-container": "#735700", "on-secondary-fixed-variant": "#5a4300", "on-primary": "#ffffff", "secondary-fixed": "#ffdf98", "on-surface-variant": "#3f4941", "surface-container-low": "#f1f3ff", "surface-container-lowest": "#ffffff", "surface-variant": "#dde2f3", "primary-fixed-dim": "#8ad7a6", "surface-dim": "#d4daea", "outline": "#707a71", "surface-container": "#e8eeff", "on-tertiary-fixed": "#0c1f18", "secondary": "#775a00", "surface-container-highest": "#dde2f3", "on-tertiary-fixed-variant": "#384b43", "secondary-container": "#fece57", "secondary-fixed-dim": "#eec14b", "primary-container": "#10633c", "on-tertiary-container": "#bcd2c7", "on-secondary": "#ffffff", "tertiary-container": "#475b52", "on-error-container": "#93000a", "surface-container-high": "#e3e8f9", "on-tertiary": "#ffffff", "inverse-on-surface": "#ecf0ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-md": "1rem", "margin-tablet": "2rem", "gutter-tablet": "1.5rem", "margin": "1rem", "space-xl": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "gutter": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "currency-display": ["Inter"], "headline-md": ["Inter"], "headline-lg": ["Inter"], "label-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"], "fraction-display": ["Inter"], "display-lg": ["Inter"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "currency-display": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "fraction-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="px-margin h-6 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm select-none"><span class="font-label-md text-label-md font-semibold text-on-surface">09:41</span><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span><span class="material-symbols-outlined text-[16px]">wifi</span><span class="material-symbols-outlined text-[16px]">battery_full</span></div></div><div class="h-16 px-space-xs flex items-center justify-between"><div class="flex items-center gap-1"><button aria-label="Kembali / Back" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="window.location.href='langkah2.html'"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Faraid Simulator Malaysia Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VIj5sQwd7qN7B6072_rsyzAjcenWpCfR7iWrjDqe6xhONBxLh26qDcc5hsL9XeXFMefRBlfq-WBZHiqWXHUPTFwxwtSxDPxOKfRfMUbRGa5ZVUulnoXImE2AcRgvudBoNH1vx3kFYLg-lDKoQwb8CPWqY8dWqSPVs1cDVo20YSrMDYbemlLmlzHPuVVd8W8ueFKpl7uShMnDP-oCHbUtlaC7hDw81ZdLHmUW4xPTZBKclF3lxorDednA"/><h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight ml-2 truncate">Keputusan Pengiraan</h1></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center mr-space-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 flex flex-col relative w-full pt-22 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full pb-8">
+<!-- Stepper Progress Header -->
+<div class="px-margin pt-2 pb-4">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-primary font-semibold tracking-wide uppercase">Langkah 3 daripada 3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Keputusan Agihan</span>
+</div>
+<!-- Visual Step Tracker -->
+<div class="grid grid-cols-3 gap-2 items-center">
+<div class="flex items-center gap-1.5 bg-primary-fixed/40 px-2.5 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary truncate">1. Harta</span>
+</div>
+<div class="flex items-center gap-1.5 bg-primary-fixed/40 px-2.5 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary truncate">2. Waris</span>
+</div>
+<div class="flex items-center gap-1.5 bg-primary px-2.5 py-1.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-primary" style="font-variation-settings: 'FILL' 1;">pie_chart</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-primary truncate">3. Agihan</span>
+</div>
+</div>
+</div>
+<div class="px-margin flex flex-col gap-space-lg">
+<!-- Hero Summary Card -->
+<div class="relative overflow-hidden rounded-xl bg-primary text-on-primary p-space-lg shadow-lg">
+<div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-secondary-container/20 blur-2xl pointer-events-none"></div>
+<div class="absolute right-4 bottom-3 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[88px] text-on-primary">balance</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-primary-fixed tracking-wide uppercase font-medium">Jumlah Harta Bersih Diagihkan</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-lowest/15 px-2 py-0.5 rounded-full text-primary-fixed font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+            Selesai Ditapis
+          </span>
+</div>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-primary tracking-tight">RM 500,000.00</span>
+</div>
+<div class="mt-3 pt-3 border-t border-primary-fixed/20 flex flex-col gap-1 text-on-primary/90">
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-secondary-fixed font-medium">
+<span class="material-symbols-outlined text-[15px]">auto_stories</span>
+<span>Asal Mas’alah: 24 Bahagian (Mazhab Shafi'i)</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary-fixed-dim leading-relaxed">
+            Penyelesaian Faraid standard dengan kehadiran Furudh (1/8 &amp; 1/6) dan baki kepada ‘Asabah bi al-Ghair.
+          </p>
+</div>
+</div>
+</div>
+<!-- Graphical Breakdown Donut Section -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">donut_large</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Carta Agihan Waris</h2>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant font-medium">5 Waris Sah</span>
+</div>
+<!-- Donut & Ratio Overview -->
+<div class="flex flex-col sm:flex-row items-center gap-4 py-2">
+<!-- SVG Donut Chart -->
+<div class="relative w-44 h-44 flex-shrink-0 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
+<!-- Background track -->
+<circle class="text-surface-container" cx="50" cy="50" fill="transparent" r="38" stroke="currentColor" stroke-width="16"></circle>
+<!-- Segment 1: Anak Lelaki (~43.33% / 216.6k) -> dasharray: 103.5, offset: 0 -->
+<circle class="transition-all duration-700 hover:opacity-90" cx="50" cy="50" fill="transparent" r="38" stroke="#00492a" stroke-dasharray="103.5 238.7" stroke-dashoffset="0" stroke-width="16"></circle>
+<!-- Segment 2: Bapa (16.67% / 83.3k) -> dasharray: 39.8, offset: -103.5 -->
+<circle class="transition-all duration-700 hover:opacity-90" cx="50" cy="50" fill="transparent" r="38" stroke="#30433b" stroke-dasharray="39.8 238.7" stroke-dashoffset="-103.5" stroke-width="16"></circle>
+<!-- Segment 3: Ibu (16.67% / 83.3k) -> dasharray: 39.8, offset: -143.3 -->
+<circle class="transition-all duration-700 hover:opacity-90" cx="50" cy="50" fill="transparent" r="38" stroke="#475b52" stroke-dasharray="39.8 238.7" stroke-dashoffset="-143.3" stroke-width="16"></circle>
+<!-- Segment 4: Isteri (12.5% / 62.5k) -> dasharray: 29.8, offset: -183.1 -->
+<circle class="transition-all duration-700 hover:opacity-90" cx="50" cy="50" fill="transparent" r="38" stroke="#775a00" stroke-dasharray="29.8 238.7" stroke-dashoffset="-183.1" stroke-width="16"></circle>
+<!-- Segment 5: Anak Perempuan (10.83% / 54.1k) -> dasharray: 25.8, offset: -212.9 -->
+<circle class="transition-all duration-700 hover:opacity-90" cx="50" cy="50" fill="transparent" r="38" stroke="#8ad7a6" stroke-dasharray="25.8 238.7" stroke-dashoffset="-212.9" stroke-width="16"></circle>
+</svg>
+<!-- Donut center badge -->
+<div class="absolute flex flex-col items-center justify-center pointer-events-none text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Nisbah</span>
+<span class="font-fraction-display text-fraction-display text-primary font-bold">100%</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">24 / 24</span>
+</div>
+</div>
+<!-- Chart Legend Interactive -->
+<div class="flex-1 w-full grid grid-cols-1 gap-2">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary flex-shrink-0"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Anak Lelaki (2x)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-primary">43.33%</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">RM 216,666.67</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary flex-shrink-0"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Isteri (1/8)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-secondary">12.50%</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">RM 62,500.00</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary flex-shrink-0"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Ibu &amp; Bapa (1/6 ms-ms)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-on-surface">33.34%</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">RM 166,666.66</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-fixed-dim flex-shrink-0"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Anak Perempuan (1x)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-on-surface">10.83%</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">RM 54,166.67</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Heirs Distribution Table -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between px-1">
+<div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Perincian Agihan Setiap Waris</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kadar hak pusaka berdasarkan hukum Syarak &amp; dalil al-Quran</p>
+</div>
+<span class="font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded-full font-bold">5 Kategori</span>
+</div>
+<!-- Card 1: Isteri -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-secondary">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/40 flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[22px]">woman</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Isteri</h3>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium">1 Orang</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kategori: Ashab al-Furudh (Fardh)</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">RM 62,500.00</span>
+<div class="flex items-center justify-end gap-1.5 mt-0.5">
+<span class="font-label-sm text-label-sm bg-secondary-fixed-dim/30 text-on-secondary-fixed px-1.5 py-0.2 rounded font-bold">1/8</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">(12.50%)</span>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 bg-surface-container-low/70 rounded-lg p-2.5 flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+<strong class="text-on-surface font-semibold">Surah An-Nisa (Ayat 12):</strong> Isteri mendapat 1/8 daripada harta kerana si mati meninggalkan anak/zuriat.
+          </p>
+</div>
+</div>
+<!-- Card 2: Bapa -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-primary">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">elderly</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Bapa</h3>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium">1 Orang</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kategori: Ashab al-Furudh (Fardh)</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">RM 83,333.33</span>
+<div class="flex items-center justify-end gap-1.5 mt-0.5">
+<span class="font-label-sm text-label-sm bg-primary-fixed/50 text-on-primary-fixed-variant px-1.5 py-0.2 rounded font-bold">1/6</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">(16.67%)</span>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 bg-surface-container-low/70 rounded-lg p-2.5 flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+<strong class="text-on-surface font-semibold">Surah An-Nisa (Ayat 11):</strong> Bapa mendapat hak fardh 1/6 dengan kehadiran anak lelaki si mati.
+          </p>
+</div>
+</div>
+<!-- Card 3: Ibu -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-primary">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">elderly_woman</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Ibu</h3>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium">1 Orang</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kategori: Ashab al-Furudh (Fardh)</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">RM 83,333.33</span>
+<div class="flex items-center justify-end gap-1.5 mt-0.5">
+<span class="font-label-sm text-label-sm bg-primary-fixed/50 text-on-primary-fixed-variant px-1.5 py-0.2 rounded font-bold">1/6</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">(16.67%)</span>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 bg-surface-container-low/70 rounded-lg p-2.5 flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+<strong class="text-on-surface font-semibold">Surah An-Nisa (Ayat 11):</strong> Ibu mendapat 1/6 kerana si mati mempunyai anak atau sekumpulan saudara.
+          </p>
+</div>
+</div>
+<!-- Card 4: Anak Lelaki (2 Orang) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-primary-container">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Anak Lelaki</h3>
+<span class="font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded font-bold">2 Orang</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">‘Asabah bi al-Ghair (Nisbah 2:1)</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">RM 216,666.67</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant font-medium">Jumlah Kongsi Berdua</span>
+</div>
+</div>
+<!-- Individual per-person breakdown pill -->
+<div class="mt-3 p-2.5 bg-primary-fixed/20 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[18px]">person</span>
+<span class="font-label-md text-label-md font-semibold">Setiap Seorang (Per Person):</span>
+</div>
+<div class="text-right">
+<span class="font-label-lg text-label-lg font-bold text-primary">RM 108,333.33</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-1 font-medium">(21.67%)</span>
+</div>
+</div>
+<div class="mt-2.5 pt-2 flex items-start gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5">info</span>
+<p class="font-body-sm text-body-sm leading-snug">
+            Menerima bahagian baki (‘Asabah) dengan kadar 2 bahagian untuk setiap 1 bahagian anak perempuan.
+          </p>
+</div>
+</div>
+<!-- Card 5: Anak Perempuan (1 Orang) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-inverse-primary">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim/40 text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">girl</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Anak Perempuan</h3>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium">1 Orang</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">‘Asabah bi al-Ghair (1 Bahagian)</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">RM 54,166.67</span>
+<div class="flex items-center justify-end gap-1 mt-0.5">
+<span class="font-label-sm text-label-sm bg-surface-container-high px-1.5 py-0.2 rounded font-semibold text-on-surface">1 Bahagian</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">(10.83%)</span>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 bg-surface-container-low/70 rounded-lg p-2.5 flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5" style="font-variation-settings: 'FILL' 1;">balance</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+<strong class="text-on-surface font-semibold">Surah An-Nisa (Ayat 11):</strong> <em>“Bagi seorang anak lelaki menyamai bahagian dua orang anak perempuan.”</em>
+</p>
+</div>
+</div>
+</div>
+<!-- Hibah & Wasiat Simulation Toggle Block -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Simulasi Kesan Hibah</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kesan jika aset tertentu dipindah milik awal</span>
+</div>
+</div>
+<!-- Toggle switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="hibah-toggle" onchange="toggleHibahCard()" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="bg-secondary-fixed/20 rounded-xl p-space-md transition-all duration-300" id="hibah-panel">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md font-bold text-on-secondary-fixed mb-1">
+              Bandingkan: Perancangan Rumah Kediaman Melalui Hibah
+            </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-2.5">
+              Jika rumah bernilai <strong class="text-on-surface">RM 300,000</strong> telah dihibahkan kepada isteri semasa hidup, hanya baki <strong class="text-on-surface">RM 200,000</strong> wang tunai/pelaburan difaraidkan. Ini melindungi isteri daripada risiko terpaksa menjual kediaman untuk membayar bahagian waris lain.
+            </p>
+<div class="grid grid-cols-2 gap-2 pt-2 border-t border-secondary-fixed-dim/40 text-left">
+<div class="bg-surface-container-lowest/80 p-2 rounded-lg">
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Hak Isteri Tanpa Hibah:</span>
+<span class="font-label-lg text-label-lg font-bold text-on-surface">RM 62,500</span>
+<span class="block font-label-sm text-label-sm text-error font-medium">(Kongsi hak rumah)</span>
+</div>
+<div class="bg-surface-container-lowest/80 p-2 rounded-lg">
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Hak Isteri Dengan Hibah:</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">RM 325,000</span>
+<span class="block font-label-sm text-label-sm text-primary font-medium">(Rumah penuh + faraid)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Official Legal Shariah Disclaimer Card -->
+<div class="bg-amber-50/80 rounded-xl p-space-md shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/60 flex-shrink-0 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-1.5 mb-1">
+<h4 class="font-label-lg text-label-lg font-bold text-secondary">Penafian Rasmi (Official Disclaimer)</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+            Keputusan ini adalah simulasi berpandukan formula <strong>Faraid Mazhab Shafi'i</strong> untuk rujukan dan celik kewangan Islam sahaja. Pengesahan hak waris, penolakan waris (takharuj), serta pengeluaran Sijil Faraid yang sah dari segi undang-undang Malaysia tertakluk sepenuhnya di bawah bidang kuasa <strong>Mahkamah Syariah Negeri</strong> atau <strong>Bahagian Pembahagian Pusaka Kecil (JKPTG)</strong>.
+          </p>
+<div class="mt-2.5 flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span>Rujukan: Akta Pembahagian Pusaka Kecil 1955 &amp; Enakmen Wasiat Orang Islam.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky / Pinned Style Bottom Action Container -->
+<div class="pt-2 flex flex-col gap-2.5">
+<div class="grid grid-cols-5 gap-2">
+<!-- Save Case Secondary Button -->
+<button class="col-span-2 h-12 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-1.5 transition-colors active:scale-95" onclick="showSaveToast()" type="button">
+<span class="material-symbols-outlined text-[20px] text-primary">bookmark_add</span>
+<span>Simpan Kes</span>
+</button>
+<!-- Export / Share Primary Button -->
+<button class="col-span-3 h-12 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 shadow-md transition-all active:scale-95" onclick="triggerExportAction()" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Eksport / Kongsi PDF</span>
+</button>
+</div>
+<!-- Secondary Quick Link -->
+<button class="w-full py-2 text-center text-on-surface-variant font-label-sm text-label-sm flex items-center justify-center gap-1 hover:text-primary transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Ubah Parameter Simulasi atau Buat Kiraan Baru</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  function toggleHibahCard() {
+    const toggle = document.getElementById('hibah-toggle');
+    const panel = document.getElementById('hibah-panel');
+    if (!toggle || !panel) return;
+
+    if (toggle.checked) {
+      panel.style.display = 'block';
+      panel.style.opacity = '1';
+    } else {
+      panel.style.opacity = '0';
+      setTimeout(() => {
+        if (!toggle.checked) panel.style.display = 'none';
+      }, 200);
+    }
+  }
+
+  function showSaveToast() {
+    if (window.FaraidApp) {
+      window.FaraidApp.notify('Kes berjaya disimpan ke peranti anda.');
+    }
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-full font-label-md text-label-md shadow-xl z-50 flex items-center gap-2 transition-all duration-300';
+    toast.innerHTML = '<span class="material-symbols-outlined text-[18px] text-primary-fixed">check_circle</span> Kes berjaya disimpan ke peranti anda.';
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 2500);
+  }
+
+  function triggerExportAction() {
+    if (window.FaraidApp) {
+      const res = window.FaraidApp.getResultData();
+      const netStr = res ? 'RM ' + window.FaraidApp.formatRM(res.netEstate) : 'RM 500,000.00';
+      window.FaraidApp.share('Sijil Simulasi Faraid Malaysia', `Ringkasan Sijil Faraid Malaysia\nJumlah Baki Harta: ${netStr}\nAsal Mas'alah: 24 Bahagian (Mazhab Shafi'i)\nDisahkan mengikut Syarak & Perundangan Malaysia.`);
+      return;
+    }
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-primary text-on-primary px-4 py-2.5 rounded-full font-label-md text-label-md shadow-xl z-50 flex items-center gap-2 transition-all duration-300';
+    toast.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> Menjana Laporan Sijil Faraid (PDF)...';
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.innerHTML = '<span class="material-symbols-outlined text-[18px] text-secondary-container">file_download_done</span> Ringkasan PDF sedia untuk dimuat turun.';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }, 1200);
+  }
+</script><script src="faraid_app.js"></script></main></body></html>

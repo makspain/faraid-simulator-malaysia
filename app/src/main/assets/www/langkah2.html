@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="ms"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>Faraid Simulator Malaysia</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "background": "#f9f9ff", "surface": "#f9f9ff", "on-surface": "#161c27", "surface-bright": "#f9f9ff", "on-primary-fixed-variant": "#00522f", "tertiary": "#30433b", "primary-fixed": "#a6f3c1", "inverse-surface": "#2a303d", "error-container": "#ffdad6", "on-secondary-fixed": "#251a00", "on-primary-fixed": "#002110", "tertiary-fixed-dim": "#b6cbc1", "error": "#ba1a1a", "tertiary-fixed": "#d2e8dc", "primary": "#00492a", "outline-variant": "#bfc9bf", "inverse-primary": "#8ad7a6", "surface-tint": "#1c6b43", "on-error": "#ffffff", "on-primary-container": "#90ddab", "on-background": "#161c27", "on-secondary-container": "#735700", "on-secondary-fixed-variant": "#5a4300", "on-primary": "#ffffff", "secondary-fixed": "#ffdf98", "on-surface-variant": "#3f4941", "surface-container-low": "#f1f3ff", "surface-container-lowest": "#ffffff", "surface-variant": "#dde2f3", "primary-fixed-dim": "#8ad7a6", "surface-dim": "#d4daea", "outline": "#707a71", "surface-container": "#e8eeff", "on-tertiary-fixed": "#0c1f18", "secondary": "#775a00", "surface-container-highest": "#dde2f3", "on-tertiary-fixed-variant": "#384b43", "secondary-container": "#fece57", "secondary-fixed-dim": "#eec14b", "primary-container": "#10633c", "on-tertiary-container": "#bcd2c7", "on-secondary": "#ffffff", "tertiary-container": "#475b52", "on-error-container": "#93000a", "surface-container-high": "#e3e8f9", "on-tertiary": "#ffffff", "inverse-on-surface": "#ecf0ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-md": "1rem", "margin-tablet": "2rem", "gutter-tablet": "1.5rem", "margin": "1rem", "space-xl": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "gutter": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "currency-display": ["Inter"], "headline-md": ["Inter"], "headline-lg": ["Inter"], "label-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"], "fraction-display": ["Inter"], "display-lg": ["Inter"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "currency-display": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "fraction-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="px-margin h-6 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm select-none"><span class="font-label-md text-label-md font-semibold text-on-surface">09:41</span><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span><span class="material-symbols-outlined text-[16px]">wifi</span><span class="material-symbols-outlined text-[16px]">battery_full</span></div></div><div class="h-16 px-space-xs flex items-center justify-between"><div class="flex items-center gap-1"><button aria-label="Kembali / Back" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Faraid Simulator Malaysia Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VIj5sQwd7qN7B6072_rsyzAjcenWpCfR7iWrjDqe6xhONBxLh26qDcc5hsL9XeXFMefRBlfq-WBZHiqWXHUPTFwxwtSxDPxOKfRfMUbRGa5ZVUulnoXImE2AcRgvudBoNH1vx3kFYLg-lDKoQwb8CPWqY8dWqSPVs1cDVo20YSrMDYbemlLmlzHPuVVd8W8ueFKpl7uShMnDP-oCHbUtlaC7hDw81ZdLHmUW4xPTZBKclF3lxorDednA"/><h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight ml-2 truncate">Perincian Waris</h1></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center mr-space-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 flex flex-col relative w-full pt-22 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full pb-28">
+<!-- Stepper Progress Tracker -->
+<div class="px-margin pt-space-xs pb-space-sm bg-surface">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Langkah 2 daripada 3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Step 2 of 3</span>
+</div>
+<!-- Stepper Breadcrumb / Chips -->
+<div class="flex items-center gap-space-xs mb-space-sm overflow-x-auto pb-1">
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-medium">1. Harta: RM 500,000</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[14px]">chevron_right</span>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-label-sm font-label-sm flex-shrink-0 font-semibold shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>2. Waris (Heirs)</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[14px]">chevron_right</span>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container text-outline text-label-sm font-label-sm flex-shrink-0">
+<span>3. Keputusan</span>
+</div>
+</div>
+<!-- 66% Emerald Progress Bar -->
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500 ease-out" style="width: 66%;"></div>
+</div>
+</div>
+<!-- Main Content Container -->
+<div class="px-margin flex flex-col gap-space-md mt-space-sm">
+<!-- Editorial Insight Card / Shariah Context -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">balance</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Ketetapan Waris Faraid</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Tentukan waris mengikut rukun pewarisan Islam. Kiraan nisbah mematuhi ketetapan fiqh Shafi'i di Malaysia.</p>
+</div>
+</div>
+<!-- Deceased Gender Toggle Section -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Jantina Si Mati</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Gender of Deceased</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">badge</span>
+</div>
+<!-- Segmented Buttons -->
+<div class="grid grid-cols-2 p-1 bg-surface-container rounded-lg gap-1" id="gender-toggle-group">
+<button class="flex items-center justify-center gap-2 py-2.5 px-space-sm rounded bg-primary text-on-primary font-label-lg text-label-lg transition-all shadow-sm" id="btn-deceased-male" onclick="setDeceasedGender('male')" type="button">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">man</span>
+<div class="flex flex-col items-start leading-tight text-left">
+<span>Lelaki</span>
+<span class="font-label-sm text-label-sm opacity-80 font-normal">Suami Meninggal</span>
+</div>
+</button>
+<button class="flex items-center justify-center gap-2 py-2.5 px-space-sm rounded text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-all" id="btn-deceased-female" onclick="setDeceasedGender('female')" type="button">
+<span class="material-symbols-outlined text-[18px]">woman</span>
+<div class="flex flex-col items-start leading-tight text-left">
+<span>Perempuan</span>
+<span class="font-label-sm text-label-sm opacity-80 font-normal">Isteri Meninggal</span>
+</div>
+</button>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] flex-shrink-0 mt-0.5">lightbulb</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="gender-explanation">
+          Menentukan sama ada waris pasangan adalah <strong class="text-on-surface font-semibold">Isteri (1/8 atau 1/4)</strong> atau <strong class="text-on-surface font-semibold">Suami (1/4 atau 1/2)</strong> mengikut kehadiran zuriat.
+        </p>
+</div>
+</div>
+<!-- Category A: Pasangan (Spouse) -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Kategori A: Pasangan</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Spousal Entitlement</span>
+</div>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm">Fardh (Ketetapan)</span>
+</div>
+<!-- Heir Row: Isteri / Suami -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex flex-col flex-1 min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface" id="spouse-title">Isteri (Wife)</span>
+<span class="px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold" id="spouse-fraction">1/8 Bahagian</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" id="spouse-note">Mendapat 1/8 sekiranya si mati meninggalkan anak/cucu. Kongsi sama rata jika berpoligami.</span>
+</div>
+<!-- Stepper Controller -->
+<div class="flex items-center self-end sm:self-center gap-2 bg-surface-container-lowest px-2 py-1.5 rounded-lg shadow-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95 transition-all" id="btn-dec-spouse" onclick="adjustCount('spouse', -1)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-8 text-center font-headline-sm text-headline-sm font-bold text-on-surface" id="count-spouse">1</span>
+<button class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center hover:bg-primary-fixed-dim active:scale-95 transition-all" id="btn-inc-spouse" onclick="adjustCount('spouse', 1)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Category B: Anak-Anak (Children) -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">family_restroom</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Kategori B: Anak Kandung</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Children (Asabah bi al-Ghair)</span>
+</div>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-label-sm font-label-sm font-semibold">Nisbah 2 : 1</span>
+</div>
+<!-- Anak Lelaki -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex flex-col flex-1 min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface">Anak Lelaki (Son)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium">Asabah (Baki)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Menerima baki harta pusaka bersama nisbah 2 bahagian berbanding anak perempuan.</span>
+</div>
+<div class="flex items-center self-end sm:self-center gap-2 bg-surface-container-lowest px-2 py-1.5 rounded-lg shadow-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95 transition-all" onclick="adjustCount('son', -1)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-8 text-center font-headline-sm text-headline-sm font-bold text-on-surface" id="count-son">2</span>
+<button class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center hover:bg-primary-fixed-dim active:scale-95 transition-all" onclick="adjustCount('son', 1)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Anak Perempuan -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex flex-col flex-1 min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface">Anak Perempuan (Daughter)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium">Asabah bi al-Ghair</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Menerima 1 bahagian nisbah bersama adik-beradik lelaki, atau bahagian fardh jika tiada anak lelaki.</span>
+</div>
+<div class="flex items-center self-end sm:self-center gap-2 bg-surface-container-lowest px-2 py-1.5 rounded-lg shadow-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95 transition-all" onclick="adjustCount('daughter', -1)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-8 text-center font-headline-sm text-headline-sm font-bold text-on-surface" id="count-daughter">1</span>
+<button class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center hover:bg-primary-fixed-dim active:scale-95 transition-all" onclick="adjustCount('daughter', 1)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Category C: Ibu Bapa (Parents) -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">elderly</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Kategori C: Ibu &amp; Bapa</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Parents Entitlement (Usul)</span>
+</div>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm">Fardh Tetap</span>
+</div>
+<!-- Bapa Toggle -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between gap-space-sm">
+<div class="flex flex-col flex-1 min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface">Bapa (Father)</span>
+<span class="px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">1/6 Bahagian</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Memperoleh 1/6 fardh kerana si mati mempunyai waris anak lelaki.</span>
+</div>
+<button class="px-3.5 py-2 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-1.5 shadow-sm active:scale-95 transition-all" id="toggle-father" onclick="toggleParent('father')" type="button">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span id="label-father">Hidup</span>
+</button>
+</div>
+<!-- Ibu Toggle -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between gap-space-sm">
+<div class="flex flex-col flex-1 min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface">Ibu (Mother)</span>
+<span class="px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">1/6 Bahagian</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Mendapat 1/6 (turun daripada 1/3) kerana terdapat zuriat keturunan si mati.</span>
+</div>
+<button class="px-3.5 py-2 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-1.5 shadow-sm active:scale-95 transition-all" id="toggle-mother" onclick="toggleParent('mother')" type="button">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span id="label-mother">Hidup</span>
+</button>
+</div>
+</div>
+<!-- Category D: Hijab / Blocking Collapsible Card -->
+<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="w-full p-space-md flex items-center justify-between text-left hover:bg-surface-container-low transition-colors" onclick="toggleCollapsible('hijab-details')" type="button">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-error-container text-on-error-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Waris Lain &amp; Peraturan Penghijaban (Hijab)</span>
+<span class="font-body-sm text-body-sm text-error font-medium">Adik-beradik &amp; Datuk/Nenek Terhijab (Blocked)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200" id="hijab-arrow">expand_more</span>
+</button>
+<div class="hidden px-space-md pb-space-md pt-0 flex flex-col gap-space-sm" id="hijab-details">
+<div class="p-space-sm rounded-lg bg-error-container/40 text-on-error-container flex items-start gap-2">
+<span class="material-symbols-outlined text-[20px] text-error flex-shrink-0 mt-0.5">gavel</span>
+<div class="flex flex-col gap-1">
+<p class="font-label-md text-label-md font-semibold">Dihijab sepenuhnya (Hijab Hirman):</p>
+<p class="font-body-sm text-body-sm">Menurut ijmak ulama Mazhab Shafi'i, kehadiran <strong class="font-semibold">Anak Lelaki</strong> dan <strong class="font-semibold">Bapa</strong> menghalang hak waris saudara kandung (adik-beradik), datuk, dan bapa saudara daripada menerima baki pusaka.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<div class="p-2 rounded bg-surface-container-low flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Saudara Kandung</span>
+<span class="font-label-md text-label-md text-outline">Terhijab Penuh</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Datuk &amp; Nenek</span>
+<span class="font-label-md text-label-md text-outline">Terhijab oleh Bapa/Ibu</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Heir Summary Status Pill -->
+<div class="p-space-md rounded-xl bg-surface-container-high text-on-surface flex flex-col gap-2 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">how_to_reg</span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Ringkasan Waris Sah Dikenal Pasti</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold" id="badge-total-heirs">5 Waris</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="heir-summary-text">
+        1 Isteri, 2 Anak Lelaki, 1 Anak Perempuan, Bapa, Ibu
+      </p>
+</div>
+</div>
+<!-- Pinned Bottom Navigation / Execution Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md px-margin py-3 pb-safe shadow-[0_-2px_12px_rgba(0,0,0,0.06)]">
+<div class="max-w-md mx-auto flex items-center gap-space-sm">
+<!-- Back to Step 1 -->
+<button class="flex-1 py-3 px-space-sm rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg text-center hover:bg-surface-container-high active:scale-95 transition-all" onclick="window.location.href='langkah1.html'" type="button">
+        Kembali
+      </button>
+<!-- Proceed to Step 3 -->
+<button class="flex-[2] py-3 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold text-center flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all" type="button" onclick="proceedToStep3()">
+<span>Kira Agihan (Step 3)</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // State management for Step 2
+  const state = {
+    deceasedGender: 'male', // 'male' | 'female'
+    counts: {
+      spouse: 1,
+      son: 2,
+      daughter: 1,
+    },
+    parents: {
+      father: true,
+      mother: true,
+    }
+  };
+
+  function setDeceasedGender(gender) {
+    state.deceasedGender = gender;
+    const btnMale = document.getElementById('btn-deceased-male');
+    const btnFemale = document.getElementById('btn-deceased-female');
+    const spouseTitle = document.getElementById('spouse-title');
+    const spouseFraction = document.getElementById('spouse-fraction');
+    const spouseNote = document.getElementById('spouse-note');
+    const genderExpl = document.getElementById('gender-explanation');
+
+    if (gender === 'male') {
+      btnMale.className = "flex items-center justify-center gap-2 py-2.5 px-space-sm rounded bg-primary text-on-primary font-label-lg text-label-lg transition-all shadow-sm";
+      btnFemale.className = "flex items-center justify-center gap-2 py-2.5 px-space-sm rounded text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-all";
+      spouseTitle.innerText = "Isteri (Wife)";
+      spouseFraction.innerText = "1/8 Bahagian";
+      spouseNote.innerText = "Mendapat 1/8 sekiranya si mati meninggalkan anak/cucu. Kongsi sama rata jika berpoligami.";
+      genderExpl.innerHTML = 'Menentukan sama ada waris pasangan adalah <strong class="text-on-surface font-semibold">Isteri (1/8 atau 1/4)</strong> atau <strong class="text-on-surface font-semibold">Suami (1/4 atau 1/2)</strong> mengikut kehadiran zuriat.';
+      if (state.counts.spouse > 4) state.counts.spouse = 4;
+    } else {
+      btnFemale.className = "flex items-center justify-center gap-2 py-2.5 px-space-sm rounded bg-primary text-on-primary font-label-lg text-label-lg transition-all shadow-sm";
+      btnMale.className = "flex items-center justify-center gap-2 py-2.5 px-space-sm rounded text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-all";
+      spouseTitle.innerText = "Suami (Husband)";
+      spouseFraction.innerText = "1/4 Bahagian";
+      spouseNote.innerText = "Mendapat 1/4 bahagian fardh kerana si mati mempunyai anak.";
+      genderExpl.innerHTML = 'Si mati perempuan: waris pasangan adalah <strong class="text-on-surface font-semibold">Suami</strong> yang berhak kepada 1/4 harta pusaka.';
+      if (state.counts.spouse > 1) state.counts.spouse = 1;
+    }
+    updateUI();
+  }
+
+  function adjustCount(type, delta) {
+    let max = 10;
+    if (type === 'spouse') {
+      max = state.deceasedGender === 'male' ? 4 : 1;
+    }
+    const current = state.counts[type];
+    const updated = Math.min(Math.max(0, current + delta), max);
+    state.counts[type] = updated;
+    updateUI();
+  }
+
+  function toggleParent(type) {
+    state.parents[type] = !state.parents[type];
+    const btn = document.getElementById(`toggle-${type}`);
+    const label = document.getElementById(`label-${type}`);
+
+    if (state.parents[type]) {
+      btn.className = "px-3.5 py-2 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-1.5 shadow-sm active:scale-95 transition-all";
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span><span>Hidup</span>`;
+    } else {
+      btn.className = "px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant font-label-lg text-label-lg flex items-center gap-1.5 hover:bg-surface-variant active:scale-95 transition-all";
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">cancel</span><span>Tiada</span>`;
+    }
+    updateUI();
+  }
+
+  function toggleCollapsible(id) {
+    const el = document.getElementById(id);
+    const arrow = document.getElementById('hijab-arrow');
+    const isHidden = el.classList.contains('hidden');
+    if (isHidden) {
+      el.classList.remove('hidden');
+      arrow.classList.add('rotate-180');
+    } else {
+      el.classList.add('hidden');
+      arrow.classList.remove('rotate-180');
+    }
+  }
+
+  function updateUI() {
+    // Stepper texts
+    document.getElementById('count-spouse').innerText = state.counts.spouse;
+    document.getElementById('count-son').innerText = state.counts.son;
+    document.getElementById('count-daughter').innerText = state.counts.daughter;
+
+    // Build Live Summary
+    const parts = [];
+    let totalHeirs = 0;
+
+    if (state.counts.spouse > 0) {
+      const spName = state.deceasedGender === 'male' ? 'Isteri' : 'Suami';
+      parts.push(`${state.counts.spouse} ${spName}`);
+      totalHeirs += state.counts.spouse;
+    }
+
+    if (state.counts.son > 0) {
+      parts.push(`${state.counts.son} Anak Lelaki`);
+      totalHeirs += state.counts.son;
+    }
+
+    if (state.counts.daughter > 0) {
+      parts.push(`${state.counts.daughter} Anak Perempuan`);
+      totalHeirs += state.counts.daughter;
+    }
+
+    if (state.parents.father) {
+      parts.push('Bapa');
+      totalHeirs += 1;
+    }
+
+    if (state.parents.mother) {
+      parts.push('Ibu');
+      totalHeirs += 1;
+    }
+
+    const summaryText = parts.length > 0 ? parts.join(', ') : 'Tiada waris dipilih';
+    document.getElementById('heir-summary-text').innerText = summaryText;
+    document.getElementById('badge-total-heirs').innerText = `${totalHeirs} Waris`;
+  }
+
+  function proceedToStep3() {
+    const estate = window.FaraidApp ? window.FaraidApp.getEstateData() : { net: 500000 };
+    const heirs = {
+      deceasedGender: state.deceasedGender,
+      wifeCount: state.deceasedGender === 'male' ? state.counts.spouse : 0,
+      husbandCount: state.deceasedGender === 'female' ? (state.counts.spouse > 0 ? 1 : 0) : 0,
+      sons: state.counts.son,
+      daughters: state.counts.daughter,
+      fatherAlive: state.parents.father,
+      motherAlive: state.parents.mother
+    };
+    if (window.FaraidApp) {
+      const result = window.FaraidApp.calculateFaraid(estate, heirs);
+      window.FaraidApp.setResultData(result);
+    }
+    window.location.href = 'keputusan.html';
+  }
+
+  // Initialize
+  updateUI();
+</script><script src="faraid_app.js"></script></main></body></html>

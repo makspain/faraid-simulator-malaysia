@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="ms"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>Faraid Simulator Malaysia</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "background": "#f9f9ff", "surface": "#f9f9ff", "on-surface": "#161c27", "surface-bright": "#f9f9ff", "on-primary-fixed-variant": "#00522f", "tertiary": "#30433b", "primary-fixed": "#a6f3c1", "inverse-surface": "#2a303d", "error-container": "#ffdad6", "on-secondary-fixed": "#251a00", "on-primary-fixed": "#002110", "tertiary-fixed-dim": "#b6cbc1", "error": "#ba1a1a", "tertiary-fixed": "#d2e8dc", "primary": "#00492a", "outline-variant": "#bfc9bf", "inverse-primary": "#8ad7a6", "surface-tint": "#1c6b43", "on-error": "#ffffff", "on-primary-container": "#90ddab", "on-background": "#161c27", "on-secondary-container": "#735700", "on-secondary-fixed-variant": "#5a4300", "on-primary": "#ffffff", "secondary-fixed": "#ffdf98", "on-surface-variant": "#3f4941", "surface-container-low": "#f1f3ff", "surface-container-lowest": "#ffffff", "surface-variant": "#dde2f3", "primary-fixed-dim": "#8ad7a6", "surface-dim": "#d4daea", "outline": "#707a71", "surface-container": "#e8eeff", "on-tertiary-fixed": "#0c1f18", "secondary": "#775a00", "surface-container-highest": "#dde2f3", "on-tertiary-fixed-variant": "#384b43", "secondary-container": "#fece57", "secondary-fixed-dim": "#eec14b", "primary-container": "#10633c", "on-tertiary-container": "#bcd2c7", "on-secondary": "#ffffff", "tertiary-container": "#475b52", "on-error-container": "#93000a", "surface-container-high": "#e3e8f9", "on-tertiary": "#ffffff", "inverse-on-surface": "#ecf0ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-md": "1rem", "margin-tablet": "2rem", "gutter-tablet": "1.5rem", "margin": "1rem", "space-xl": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "gutter": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "currency-display": ["Inter"], "headline-md": ["Inter"], "headline-lg": ["Inter"], "label-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"], "fraction-display": ["Inter"], "display-lg": ["Inter"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "currency-display": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "fraction-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="px-margin h-6 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm select-none"><span class="font-label-md text-label-md font-semibold text-on-surface">09:41</span><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span><span class="material-symbols-outlined text-[16px]">wifi</span><span class="material-symbols-outlined text-[16px]">battery_full</span></div></div><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Faraid Simulator Malaysia Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VIj5sQwd7qN7B6072_rsyzAjcenWpCfR7iWrjDqe6xhONBxLh26qDcc5hsL9XeXFMefRBlfq-WBZHiqWXHUPTFwxwtSxDPxOKfRfMUbRGa5ZVUulnoXImE2AcRgvudBoNH1vx3kFYLg-lDKoQwb8CPWqY8dWqSPVs1cDVo20YSrMDYbemlLmlzHPuVVd8W8ueFKpl7uShMnDP-oCHbUtlaC7hDw81ZdLHmUW4xPTZBKclF3lxorDednA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Faraid Simulator</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Simulasi Faraid Malaysia</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Bantuan &amp; Maklumat / Help" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[22px]">info</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-22 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-md">
+<!-- Progress Tracker -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm">1</span>
+<span class="font-label-lg text-label-lg text-on-surface">Langkah 1 <span class="font-normal text-on-surface-variant text-body-sm">daripada 3</span></span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold tracking-wide uppercase">Harta Bersih</span>
+</div>
+<!-- Stepper Pipeline -->
+<div class="grid grid-cols-3 gap-space-xs my-space-xs text-center">
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm font-semibold text-primary">1. Harta</span>
+<span class="text-[10px] text-primary/80">Estate Value</span>
+</div>
+<div class="flex flex-col items-center opacity-40">
+<span class="font-label-sm text-label-sm font-medium text-on-surface-variant">2. Waris</span>
+<span class="text-[10px] text-on-surface-variant">Heirs</span>
+</div>
+<div class="flex flex-col items-center opacity-40">
+<span class="font-label-sm text-label-sm font-medium text-on-surface-variant">3. Keputusan</span>
+<span class="text-[10px] text-on-surface-variant">Distribution</span>
+</div>
+</div>
+<!-- Multi-segment bar -->
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden relative mt-1">
+<div class="h-full bg-primary rounded-full transition-all duration-500 w-1/3 relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-secondary-container shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Header Banner & Guidance -->
+<div class="space-y-space-xs">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">account_balance</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface leading-snug">Maklumat &amp; Nilai Harta Si Mati</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Deceased Estate Valuation &amp; Deductions</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+      Sila masukkan nilai kasar harta dan potongan wajib mengikut tertib syarak sebelum pembahagian Faraid dilaksanakan.
+    </p>
+</div>
+<!-- Shariah Hierarchy Alert Pill -->
+<div class="flex items-center gap-space-sm bg-surface-container-low p-space-sm rounded-lg text-tertiary">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0">verified</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant leading-tight">
+<strong class="text-on-surface font-semibold">Tertib Pembahagian Syarak:</strong> Jenazah → Hutang → Wasiat → Faraid.
+    </span>
+</div>
+<!-- Form Inputs -->
+<form class="space-y-space-md" id="estateForm" onsubmit="event.preventDefault();">
+<!-- Field 1: Gross Estate -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-xs transition-all focus-within:shadow-md">
+<div class="flex justify-between items-baseline">
+<label class="font-label-lg text-label-lg text-on-surface" for="grossEstate">
+          Jumlah Harta Kasar
+          <span class="block font-normal text-on-surface-variant text-body-sm">Gross Estate Value</span>
+</label>
+<span class="material-symbols-outlined text-primary text-[20px]">real_estate_agent</span>
+</div>
+<div class="relative flex items-center rounded-lg bg-surface-container-low px-space-md py-2 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary">
+<span class="font-headline-sm text-headline-sm text-primary font-bold mr-space-xs select-none">RM</span>
+<input aria-label="Jumlah Harta Kasar" class="w-full bg-transparent font-currency-display text-currency-display text-on-surface focus:outline-none tracking-tight font-bold" id="grossEstate" inputmode="numeric" placeholder="0.00" type="text" value="550,000.00"/>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">info</span>
+        Termasuk hartanah, akaun bank, KWSP/Tabung Haji (tanpa penama), saham &amp; kenderaan.
+      </p>
+</div>
+<!-- Deductions Section Accordion/Card Header -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">receipt_long</span>
+<span class="font-label-lg text-label-lg text-on-surface">Tolak: Tanggungan Wajib Syarak</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full font-semibold">3 Potongan</span>
+</div>
+<!-- Deduction 1: Funeral -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-xs">
+<div class="flex justify-between items-start">
+<div>
+<label class="font-label-lg text-label-lg text-on-surface" for="funeralCost">
+            1. Kos Pengurusan Jenazah
+          </label>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Funeral &amp; Burial Expenses</p>
+</div>
+<span class="text-xs bg-tertiary-fixed text-on-tertiary-fixed font-semibold px-2 py-0.5 rounded-full">Keutamaan #1</span>
+</div>
+<div class="relative flex items-center rounded-lg bg-surface-container-low px-space-md py-2 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary">
+<span class="font-label-lg text-label-lg text-primary font-semibold mr-space-xs select-none">RM</span>
+<input class="w-full bg-transparent font-headline-sm text-headline-sm text-on-surface focus:outline-none font-semibold" id="funeralCost" inputmode="numeric" placeholder="0.00" type="text" value="5,000.00"/>
+</div>
+<div class="flex items-start gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm">
+          Hak pertama yang perlu diselesaikan secara munasabah mengikut syarak.
+        </span>
+</div>
+</div>
+<!-- Deduction 2: Debts -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-xs">
+<div class="flex justify-between items-start">
+<div>
+<label class="font-label-lg text-label-lg text-on-surface" for="debtCost">
+            2. Hutang Si Mati
+          </label>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Debts &amp; Liabilities (Hutang Manusia &amp; Allah)</p>
+</div>
+<span class="text-xs bg-surface-container-high text-on-surface font-semibold px-2 py-0.5 rounded-full">Keutamaan #2</span>
+</div>
+<div class="relative flex items-center rounded-lg bg-surface-container-low px-space-md py-2 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary">
+<span class="font-label-lg text-label-lg text-primary font-semibold mr-space-xs select-none">RM</span>
+<input class="w-full bg-transparent font-headline-sm text-headline-sm text-on-surface focus:outline-none font-semibold" id="debtCost" inputmode="numeric" placeholder="0.00" type="text" value="30,000.00"/>
+</div>
+<!-- Categories Pills -->
+<div class="flex flex-wrap gap-space-xs pt-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-[11px] font-medium text-on-surface">
+<span class="material-symbols-outlined text-[13px] text-tertiary">home</span>
+          Pinjaman &amp; Kad Kredit
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-[11px] font-medium text-on-surface">
+<span class="material-symbols-outlined text-[13px] text-tertiary">volunteer_activism</span>
+          Fidyah, Zakat &amp; Haji
+        </span>
+</div>
+</div>
+<!-- Deduction 3: Wasiat -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-xs">
+<div class="flex justify-between items-start">
+<div>
+<label class="font-label-lg text-label-lg text-on-surface" for="wasiatCost">
+            3. Wasiat Bukan Waris
+          </label>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Bequests to Non-Heirs (Maksimum 1/3)</p>
+</div>
+<span class="text-xs bg-secondary-fixed text-on-secondary-fixed font-semibold px-2 py-0.5 rounded-full">Maks 1/3</span>
+</div>
+<div class="relative flex items-center rounded-lg bg-surface-container-low px-space-md py-2 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary">
+<span class="font-label-lg text-label-lg text-primary font-semibold mr-space-xs select-none">RM</span>
+<input class="w-full bg-transparent font-headline-sm text-headline-sm text-on-surface focus:outline-none font-semibold" id="wasiatCost" inputmode="numeric" placeholder="0.00" type="text" value="15,000.00"/>
+</div>
+<!-- Islamic Cap Guidance -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0">balance</span>
+<div class="text-body-sm font-body-sm leading-tight text-on-surface">
+<span class="text-on-surface-variant">Had maksimum 1/3 baki:</span>
+<span class="font-semibold text-primary" id="maxWasiatLabel">RM 171,666.67</span>
+</div>
+</div>
+</div>
+<!-- Dynamic Summary Card: Baki Harta Bersih -->
+<div class="bg-primary text-on-primary rounded-xl p-space-md shadow-md space-y-space-xs relative overflow-hidden">
+<!-- Subtle Decorative geometry -->
+<div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-primary-container opacity-50 blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary-fixed uppercase tracking-wider font-semibold">
+          Baki Harta Bersih Untuk Faraid
+        </span>
+<span class="material-symbols-outlined text-primary-fixed text-[22px]">auto_awesome</span>
+</div>
+<div>
+<span class="text-[11px] block text-primary-fixed-dim uppercase tracking-wider">Net Distributable Estate</span>
+<div class="font-display-lg text-display-lg text-on-primary tracking-tight font-bold my-1 flex items-baseline gap-1">
+<span class="text-2xl font-semibold opacity-90">RM</span>
+<span id="netDisplay">500,000.00</span>
+</div>
+</div>
+<!-- Formula breakdown capsule -->
+<div class="pt-1">
+<div class="inline-flex items-center flex-wrap gap-1 bg-surface-container-highest/20 text-on-primary px-2.5 py-1.5 rounded-lg text-body-sm font-body-sm">
+<span class="opacity-90">Pengiraan:</span>
+<span class="font-semibold">RM 550k</span>
+<span class="opacity-60">−</span>
+<span>5k <span class="text-[10px] opacity-80">(Jenazah)</span></span>
+<span class="opacity-60">−</span>
+<span>30k <span class="text-[10px] opacity-80">(Hutang)</span></span>
+<span class="opacity-60">−</span>
+<span>15k <span class="text-[10px] opacity-80">(Wasiat)</span></span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-space-xs space-y-space-sm pb-space-lg">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold rounded-lg shadow-md flex items-center justify-center gap-space-xs active:scale-[0.99] transition-transform shadow-primary/20" id="continueBtn" type="button">
+<span>Seterusnya: Pilih Waris (Langkah 2)</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<button class="w-full h-11 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center gap-space-xs transition-colors" id="resetBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">restart_alt</span>
+<span>Set Semula Butiran / Reset</span>
+</button>
+</div>
+</form>
+</div>
+<script>
+  (function () {
+    const grossInput = document.getElementById('grossEstate');
+    const funeralInput = document.getElementById('funeralCost');
+    const debtInput = document.getElementById('debtCost');
+    const wasiatInput = document.getElementById('wasiatCost');
+    const netDisplay = document.getElementById('netDisplay');
+    const maxWasiatLabel = document.getElementById('maxWasiatLabel');
+    const resetBtn = document.getElementById('resetBtn');
+    const continueBtn = document.getElementById('continueBtn');
+
+    function parseVal(str) {
+      if (!str) return 0;
+      const clean = str.replace(/[^0-9.]/g, '');
+      const parsed = parseFloat(clean);
+      return isNaN(parsed) ? 0 : parsed;
+    }
+
+    function formatCurrency(num) {
+      return num.toLocaleString('en-MY', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function recalculate() {
+      const gross = parseVal(grossInput.value);
+      const funeral = parseVal(funeralInput.value);
+      const debt = parseVal(debtInput.value);
+      let wasiat = parseVal(wasiatInput.value);
+
+      const postDebt = Math.max(0, gross - funeral - debt);
+      const maxAllowedWasiat = postDebt / 3;
+
+      if (maxWasiatLabel) {
+        maxWasiatLabel.textContent = 'RM ' + formatCurrency(maxAllowedWasiat);
+      }
+
+      if (wasiat > maxAllowedWasiat && maxAllowedWasiat > 0) {
+        wasiatInput.classList.add('text-error');
+      } else {
+        wasiatInput.classList.remove('text-error');
+      }
+
+      const net = Math.max(0, postDebt - wasiat);
+      if (netDisplay) {
+        netDisplay.textContent = formatCurrency(net);
+      }
+    }
+
+    [grossInput, funeralInput, debtInput, wasiatInput].forEach(inp => {
+      if (!inp) return;
+      inp.addEventListener('input', recalculate);
+      inp.addEventListener('blur', function () {
+        const val = parseVal(this.value);
+        this.value = formatCurrency(val);
+        recalculate();
+      });
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        grossInput.value = '550,000.00';
+        funeralInput.value = '5,000.00';
+        debtInput.value = '30,000.00';
+        wasiatInput.value = '15,000.00';
+        recalculate();
+      });
+    }
+
+    if (continueBtn) {
+      continueBtn.addEventListener('click', function () {
+        const net = parseVal(netDisplay ? netDisplay.textContent : '0');
+        if (net <= 0) {
+          alert('Sila pastikan Baki Harta Bersih melebihi RM 0 sebelum memilih waris.');
+          return;
+        }
+        if (window.FaraidApp) {
+          window.FaraidApp.setEstateData({
+            gross: parseVal(grossInput.value),
+            funeral: parseVal(funeralInput.value),
+            debt: parseVal(debtInput.value),
+            wasiat: parseVal(wasiatInput.value),
+            net: net
+          });
+        }
+        window.location.href = 'langkah2.html';
+      });
+    }
+
+    recalculate();
+  })();
+</script><script src="faraid_app.js"></script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(26,32,44,0.06)]" data-active-classes="[&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold"><div class="flex justify-around items-center h-20 px-space-xs max-w-md mx-auto"><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="utama" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">home</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Utama<span class="block text-[9px] font-normal opacity-80 leading-none">Home</span></span></a><a aria-current="page" class="group flex flex-col items-center justify-center gap-1 w-20 py-1 transition-all select-none [&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold" data-path="simulasi" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">calculate</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Simulasi<span class="block text-[9px] font-normal opacity-80 leading-none">Simulate</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="panduan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">menu_book</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Panduan<span class="block text-[9px] font-normal opacity-80 leading-none">Learn</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="tersimpan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">bookmark</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Tersimpan<span class="block text-[9px] font-normal opacity-80 leading-none">Saved</span></span></a></div></nav></body></html>
