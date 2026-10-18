@@ -6,7 +6,7 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Faraid Simulator Malaysia Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VIj5sQwd7qN7B6072_rsyzAjcenWpCfR7iWrjDqe6xhONBxLh26qDcc5hsL9XeXFMefRBlfq-WBZHiqWXHUPTFwxwtSxDPxOKfRfMUbRGa5ZVUulnoXImE2AcRgvudBoNH1vx3kFYLg-lDKoQwb8CPWqY8dWqSPVs1cDVo20YSrMDYbemlLmlzHPuVVd8W8ueFKpl7uShMnDP-oCHbUtlaC7hDw81ZdLHmUW4xPTZBKclF3lxorDednA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Faraid Simulator</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Simulasi Faraid Malaysia</span></div></div><div class="flex items-center gap-space-xs"><button id="info-header-btn" type="button" role="button" aria-label="Tentang Faraid Simulator / About Faraid Simulator" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:bg-surface-container-high transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"><span class="material-symbols-outlined text-[22px]">info</span></button><button id="profile-header-btn" type="button" role="button" aria-label="Profil &amp; Tetapan / Profile &amp; Settings" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:bg-surface-container-high transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"><div id="header-avatar-circle" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-xs select-none shadow-sm transition-transform active:scale-95"><span id="header-avatar-icon" class="material-symbols-outlined text-[18px]">person</span><span id="header-avatar-initial" class="hidden uppercase font-semibold"></span></div></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-[calc(env(safe-area-inset-top,0px)+4rem)] pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-md">
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Faraid Simulator Malaysia Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VIj5sQwd7qN7B6072_rsyzAjcenWpCfR7iWrjDqe6xhONBxLh26qDcc5hsL9XeXFMefRBlfq-WBZHiqWXHUPTFwxwtSxDPxOKfRfMUbRGa5ZVUulnoXImE2AcRgvudBoNH1vx3kFYLg-lDKoQwb8CPWqY8dWqSPVs1cDVo20YSrMDYbemlLmlzHPuVVd8W8ueFKpl7uShMnDP-oCHbUtlaC7hDw81ZdLHmUW4xPTZBKclF3lxorDednA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Faraid Simulator</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Simulasi Faraid Malaysia</span></div></div><div class="flex items-center gap-space-xs"><button id="info-header-btn" type="button" role="button" onclick="window.openFaraidInfoSheet &amp;&amp; window.openFaraidInfoSheet()" aria-label="Tentang Faraid Simulator / About Faraid Simulator" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:bg-surface-container-high transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"><span class="material-symbols-outlined text-[22px] pointer-events-none">info</span></button><button id="profile-header-btn" type="button" role="button" onclick="window.openFaraidProfileSheet &amp;&amp; window.openFaraidProfileSheet()" aria-label="Profil &amp; Tetapan / Profile &amp; Settings" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:bg-surface-container-high transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"><div id="header-avatar-circle" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-xs select-none shadow-sm transition-transform active:scale-95 pointer-events-none"><span id="header-avatar-icon" class="material-symbols-outlined text-[18px] pointer-events-none">person</span><span id="header-avatar-initial" class="hidden uppercase font-semibold pointer-events-none"></span></div></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-[calc(env(safe-area-inset-top,0px)+4rem)] pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-md">
 <!-- Greeting & Status Badge -->
 <div class="flex items-center justify-between pt-space-xs">
 <div class="flex flex-col">
@@ -344,10 +344,11 @@
         Padam
       </button>
     </div>
+  </div>
 </div>
 
 <!-- Material-style Bottom Sheet: Tentang Faraid Simulator -->
-<div id="info-sheet" class="fixed inset-0 z-50 transition-all duration-300 pointer-events-none opacity-0 invisible" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="info-sheet-title">
+<div id="info-sheet" class="fixed inset-0 z-[60] transition-all duration-300 pointer-events-none opacity-0 invisible" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="info-sheet-title">
   <!-- Backdrop -->
   <div id="info-sheet-backdrop" class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm transition-opacity duration-300"></div>
 
@@ -538,7 +539,7 @@
 </div>
 
 <!-- Material-style Bottom Sheet: Profil & Tetapan -->
-<div id="profile-sheet" class="fixed inset-0 z-50 transition-all duration-300 pointer-events-none opacity-0 invisible" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="profile-sheet-title">
+<div id="profile-sheet" class="fixed inset-0 z-[60] transition-all duration-300 pointer-events-none opacity-0 invisible" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="profile-sheet-title">
   <!-- Backdrop -->
   <div id="profile-sheet-backdrop" class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm transition-opacity duration-300"></div>
 
@@ -656,7 +657,7 @@
 </div>
 
 <!-- Dialog Modal for Clear All Simulation Data Confirmation -->
-<div id="clear-all-data-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-200 pointer-events-none opacity-0 invisible" role="dialog" aria-modal="true" aria-labelledby="clear-all-data-title">
+<div id="clear-all-data-modal" class="fixed inset-0 z-[70] flex items-center justify-center p-4 transition-all duration-200 pointer-events-none opacity-0 invisible" role="dialog" aria-modal="true" aria-labelledby="clear-all-data-title">
   <div id="clear-all-data-backdrop" class="absolute inset-0 bg-on-surface/50 backdrop-blur-sm transition-opacity duration-200"></div>
   <div id="clear-all-data-panel" class="relative z-10 bg-surface-container-lowest rounded-2xl p-space-md shadow-2xl max-w-sm w-full border border-surface-variant transition-all duration-200 transform scale-95 flex flex-col space-y-3 pointer-events-auto">
     <div class="flex items-center gap-2 text-error pb-1">
@@ -1174,12 +1175,13 @@
         if (typeof onOpened === 'function') onOpened();
         sheetEl.classList.remove('invisible', 'pointer-events-none');
         sheetEl.classList.add('visible', 'pointer-events-auto');
-        panelEl.style.transform = '';
+        panelEl.style.transition = 'transform 0.3s cubic-bezier(0.2, 0, 0, 1)';
         requestAnimationFrame(() => {
           sheetEl.classList.remove('opacity-0');
           sheetEl.classList.add('opacity-100');
           panelEl.classList.remove('translate-y-full');
           panelEl.classList.add('translate-y-0');
+          panelEl.style.transform = 'translateY(0)';
         });
       }
 
@@ -1188,10 +1190,11 @@
         sheetEl.classList.add('opacity-0');
         panelEl.classList.remove('translate-y-0');
         panelEl.classList.add('translate-y-full');
+        panelEl.style.transition = 'transform 0.28s ease-in';
+        panelEl.style.transform = 'translateY(100%)';
         setTimeout(() => {
           sheetEl.classList.remove('visible', 'pointer-events-auto');
           sheetEl.classList.add('invisible', 'pointer-events-none');
-          panelEl.style.transform = '';
           if (typeof onClosed === 'function') onClosed();
         }, 280);
       }
@@ -1245,6 +1248,9 @@
       if (profileNameInput) profileNameInput.value = prefs.displayName || '';
       setLanguageUI(prefs.language || 'ms');
     });
+
+    window.openFaraidInfoSheet = () => infoSheetCtrl.open();
+    window.openFaraidProfileSheet = () => profileSheetCtrl.open();
 
     function setLanguageUI(lang) {
       currentSelectedLang = lang === 'en' ? 'en' : 'ms';
@@ -1315,7 +1321,10 @@
     }
 
     // Info Sheet Listeners
-    infoBtn?.addEventListener('click', () => infoSheetCtrl.open());
+    infoBtn?.addEventListener('click', (e) => {
+      e?.preventDefault();
+      infoSheetCtrl.open();
+    });
     closeInfoBtn?.addEventListener('click', () => infoSheetCtrl.close());
     dismissInfoBtn?.addEventListener('click', () => infoSheetCtrl.close());
     infoBackdrop?.addEventListener('click', () => infoSheetCtrl.close());
@@ -1344,7 +1353,10 @@
     });
 
     // Profile Sheet Listeners
-    profileBtn?.addEventListener('click', () => profileSheetCtrl.open());
+    profileBtn?.addEventListener('click', (e) => {
+      e?.preventDefault();
+      profileSheetCtrl.open();
+    });
     closeProfileBtn?.addEventListener('click', () => profileSheetCtrl.close());
     cancelProfileBtn?.addEventListener('click', () => profileSheetCtrl.close());
     profileBackdrop?.addEventListener('click', () => profileSheetCtrl.close());
