@@ -167,7 +167,10 @@ Faraid-Sim-Malaysia/
         │   │   ├── colors.xml                  # Emerald & warm palette (#00492A, #F9F9FF)
         │   │   ├── strings.xml                 # App title and localized strings
         │   │   └── themes.xml                  # Theme.AppCompat.Light.NoActionBar
-        │   └── drawable/                       # Vector assets & adaptive launcher icons
+        │   ├── drawable/                       # Adaptive icon background vector (ic_launcher_background.xml)
+        │   ├── drawable-*/                     # Adaptive icon foreground assets (mdpi to xxxhdpi)
+        │   ├── mipmap-anydpi-v26/              # Adaptive icon definitions (ic_launcher.xml, ic_launcher_round.xml)
+        │   └── mipmap-*/                       # Legacy launcher icon bitmaps (regular & round)
         └── assets/www/                         # Production WebView Web Core
             ├── index.html                      # Root trampoline redirecting to utama.html
             ├── utama.html                      # Dashboard screen

@@ -4,4 +4,5 @@
     <color name="primary_container">#10633C</color>
     <color name="background">#F9F9FF</color>
     <color name="surface">#F9F9FF</color>
+    <color name="ic_launcher_background">#00492A</color>
 </resources>
