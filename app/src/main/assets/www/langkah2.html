@@ -17,7 +17,7 @@
 <div class="flex items-center gap-space-xs mb-space-sm overflow-x-auto pb-1">
 <div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm flex-shrink-0">
 <span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-medium">1. Harta: RM 500,000</span>
+<span class="font-medium" id="step1-harta-chip">1. Harta: RM 500,000</span>
 </div>
 <span class="material-symbols-outlined text-outline text-[14px]">chevron_right</span>
 <div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-label-sm font-label-sm flex-shrink-0 font-semibold shadow-sm">
@@ -256,20 +256,19 @@
 <p class="font-body-sm text-body-sm text-on-surface-variant" id="heir-summary-text">
         1 Isteri, 2 Anak Lelaki, 1 Anak Perempuan, Bapa, Ibu
       </p>
-</div>
-</div>
-<!-- Pinned Bottom Navigation / Execution Bar -->
-<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md px-margin py-3 pb-safe shadow-[0_-2px_12px_rgba(0,0,0,0.06)]">
-<div class="max-w-md mx-auto flex items-center gap-space-sm">
-<!-- Back to Step 1 -->
-<button class="flex-1 py-3 px-space-sm rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg text-center hover:bg-surface-container-high active:scale-95 transition-all" onclick="window.location.href='langkah1.html'" type="button">
-        Kembali
-      </button>
-<!-- Proceed to Step 3 -->
-<button class="flex-[2] py-3 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold text-center flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all" type="button" onclick="proceedToStep3()">
-<span>Kira Agihan (Step 3)</span>
-<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-</button>
+<!-- Action Buttons (Kembali & Kira Agihan) -->
+<div class="pt-space-xs pb-space-lg">
+  <div class="flex items-center gap-space-sm">
+    <!-- Back to Step 1 -->
+    <button class="flex-1 h-12 rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg text-center hover:bg-surface-container-high active:scale-95 transition-all flex items-center justify-center" onclick="window.FaraidApp ? window.FaraidApp.navigateTo('langkah1.html') : window.location.href='langkah1.html'" type="button">
+      Kembali
+    </button>
+    <!-- Proceed to Step 3 -->
+    <button class="flex-[2] h-12 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold text-center flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all" type="button" onclick="proceedToStep3()">
+      <span>Kira Agihan (Step 3)</span>
+      <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+    </button>
+  </div>
 </div>
 </div>
 </div>
@@ -395,6 +394,12 @@
     const summaryText = parts.length > 0 ? parts.join(', ') : 'Tiada waris dipilih';
     document.getElementById('heir-summary-text').innerText = summaryText;
     document.getElementById('badge-total-heirs').innerText = `${totalHeirs} Waris`;
+
+    const estate = window.FaraidApp ? window.FaraidApp.getEstateData() : null;
+    const chip = document.getElementById('step1-harta-chip');
+    if (chip && estate && typeof estate.net === 'number' && estate.net > 0) {
+      chip.innerText = `1. Harta: RM ${estate.net.toLocaleString('en-MY', { maximumFractionDigits: 0 })}`;
+    }
   }
 
   function proceedToStep3() {
@@ -421,4 +426,4 @@
 
   // Initialize
   updateUI();
-</script><script src="faraid_app.js"></script></main></body></html>
+</script><script src="faraid_app.js"></script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(26,32,44,0.06)]" data-active-classes="[&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold"><div class="flex justify-around items-center h-20 px-space-xs max-w-md mx-auto"><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="utama" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">home</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Utama<span class="block text-[9px] font-normal opacity-80 leading-none">Home</span></span></a><a aria-current="page" class="group flex flex-col items-center justify-center gap-1 w-20 py-1 transition-all select-none [&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold" data-path="simulasi" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">calculate</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Simulasi<span class="block text-[9px] font-normal opacity-80 leading-none">Simulate</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="panduan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">menu_book</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Panduan<span class="block text-[9px] font-normal opacity-80 leading-none">Learn</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="tersimpan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">bookmark</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Tersimpan<span class="block text-[9px] font-normal opacity-80 leading-none">Saved</span></span></a></div></nav></body></html>
