@@ -290,8 +290,11 @@
             wasiat: parseVal(wasiatInput.value),
             net: net
           });
+        if (window.FaraidApp && typeof window.FaraidApp.navigateTo === 'function') {
+          window.FaraidApp.navigateTo('langkah2.html');
+        } else {
+          window.location.href = 'langkah2.html';
         }
-        window.location.href = 'langkah2.html';
       });
     }
 

@@ -366,37 +366,48 @@ window.FaraidApp = (function () {
       });
     });
 
-    // Top CTA & Shortcuts in Utama and Panduan
-    document.querySelectorAll('a, button').forEach(el => {
-      if (el.dataset.navBound) return;
-      const text = (el.textContent || '').trim().toLowerCase();
-      if (
-        text.includes('mula kira sekarang') ||
-        text.includes('kalkulator pantas') ||
-        text.includes('sambung kira') ||
-        text.includes('mula simulasi faraid') ||
-        text === 'kira' ||
-        text.startsWith('kira')
-      ) {
-        el.dataset.navBound = 'true';
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          navigateTo('langkah1.html');
-        });
-      } else if (text.includes('panduan waris') || text.includes('pusat rujukan')) {
-        el.dataset.navBound = 'true';
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          navigateTo('panduan.html');
-        });
-      } else if (text.includes('kes tersimpan') || text.includes('lihat semua')) {
-        el.dataset.navBound = 'true';
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          showSavedModal();
-        });
-      }
-    });
+    // Top CTA & Shortcuts in Utama and Panduan only (avoid hijacking forms or step buttons)
+    const currentPath = (typeof window !== 'undefined' && window.location && window.location.pathname)
+      ? window.location.pathname.toLowerCase()
+      : '';
+    const isDashboardOrGuide = currentPath.includes('utama.html') ||
+                               currentPath.includes('index.html') ||
+                               currentPath.includes('panduan.html') ||
+                               currentPath === '' ||
+                               currentPath.endsWith('/');
+
+    if (isDashboardOrGuide) {
+      document.querySelectorAll('a, button').forEach(el => {
+        if (el.dataset.navBound || el.getAttribute('onclick')) return;
+        const text = (el.textContent || '').trim().toLowerCase();
+        if (
+          text === 'mula kira sekarang' ||
+          text.includes('mula kira sekarang') ||
+          text === 'kalkulator pantas' ||
+          text.includes('kalkulator pantas') ||
+          text === 'mula simulasi faraid' ||
+          text.includes('mula simulasi faraid')
+        ) {
+          el.dataset.navBound = 'true';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('langkah1.html');
+          });
+        } else if (text.includes('panduan waris') || text.includes('pusat rujukan')) {
+          el.dataset.navBound = 'true';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('panduan.html');
+          });
+        } else if (text.includes('kes tersimpan') || text.includes('lihat semua')) {
+          el.dataset.navBound = 'true';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSavedModal();
+          });
+        }
+      });
+    }
 
     updateSavedBadges();
   }

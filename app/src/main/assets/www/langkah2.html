@@ -411,6 +411,10 @@
     if (window.FaraidApp) {
       const result = window.FaraidApp.calculateFaraid(estate, heirs);
       window.FaraidApp.setResultData(result);
+      if (typeof window.FaraidApp.navigateTo === 'function') {
+        window.FaraidApp.navigateTo('keputusan.html');
+        return;
+      }
     }
     window.location.href = 'keputusan.html';
   }
