@@ -1,6 +1,7 @@
 package com.faraid.simulator
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -91,7 +92,15 @@ class MainActivity : AppCompatActivity() {
                 if (url.startsWith("file:///android_asset/")) {
                     return false
                 }
-                return false
+                return try {
+                    val intent = Intent(Intent.ACTION_VIEW, request.url).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                    view?.context?.startActivity(intent)
+                    true
+                } catch (_: Exception) {
+                    false
+                }
             }
         }
     }

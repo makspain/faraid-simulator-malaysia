@@ -6,7 +6,7 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Faraid Simulator Malaysia Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VIj5sQwd7qN7B6072_rsyzAjcenWpCfR7iWrjDqe6xhONBxLh26qDcc5hsL9XeXFMefRBlfq-WBZHiqWXHUPTFwxwtSxDPxOKfRfMUbRGa5ZVUulnoXImE2AcRgvudBoNH1vx3kFYLg-lDKoQwb8CPWqY8dWqSPVs1cDVo20YSrMDYbemlLmlzHPuVVd8W8ueFKpl7uShMnDP-oCHbUtlaC7hDw81ZdLHmUW4xPTZBKclF3lxorDednA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Faraid Simulator</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Simulasi Faraid Malaysia</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Bantuan &amp; Maklumat / Help" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[22px]">info</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-[calc(env(safe-area-inset-top,0px)+4rem)] pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-md">
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Faraid Simulator Malaysia Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VIj5sQwd7qN7B6072_rsyzAjcenWpCfR7iWrjDqe6xhONBxLh26qDcc5hsL9XeXFMefRBlfq-WBZHiqWXHUPTFwxwtSxDPxOKfRfMUbRGa5ZVUulnoXImE2AcRgvudBoNH1vx3kFYLg-lDKoQwb8CPWqY8dWqSPVs1cDVo20YSrMDYbemlLmlzHPuVVd8W8ueFKpl7uShMnDP-oCHbUtlaC7hDw81ZdLHmUW4xPTZBKclF3lxorDednA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Faraid Simulator</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Simulasi Faraid Malaysia</span></div></div><div class="flex items-center gap-space-xs"><button id="info-header-btn" type="button" role="button" aria-label="Tentang Faraid Simulator / About Faraid Simulator" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:bg-surface-container-high transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"><span class="material-symbols-outlined text-[22px]">info</span></button><button id="profile-header-btn" type="button" role="button" aria-label="Profil &amp; Tetapan / Profile &amp; Settings" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:bg-surface-container-high transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"><div id="header-avatar-circle" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-xs select-none shadow-sm transition-transform active:scale-95"><span id="header-avatar-icon" class="material-symbols-outlined text-[18px]">person</span><span id="header-avatar-initial" class="hidden uppercase font-semibold"></span></div></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-[calc(env(safe-area-inset-top,0px)+4rem)] pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-md">
 <!-- Greeting & Status Badge -->
 <div class="flex items-center justify-between pt-space-xs">
 <div class="flex flex-col">
@@ -14,7 +14,7 @@
 <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
 <span class="font-label-sm text-label-sm font-semibold tracking-wide uppercase text-primary">Mazhab Syafi'i • Malaysia</span>
 </div>
-<h1 class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight mt-0.5">
+<h1 id="greeting-heading" class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight mt-0.5">
         Assalamualaikum, Selamat Datang
       </h1>
 <span class="font-body-sm text-body-sm text-on-surface-variant">Welcome to Islamic Estate Planning Portal</span>
@@ -344,9 +344,340 @@
         Padam
       </button>
     </div>
+</div>
+
+<!-- Material-style Bottom Sheet: Tentang Faraid Simulator -->
+<div id="info-sheet" class="fixed inset-0 z-50 transition-all duration-300 pointer-events-none opacity-0 invisible" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="info-sheet-title">
+  <!-- Backdrop -->
+  <div id="info-sheet-backdrop" class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm transition-opacity duration-300"></div>
+
+  <!-- Sheet Panel -->
+  <div id="info-sheet-panel" class="absolute inset-x-0 bottom-0 max-w-md mx-auto w-full transition-transform duration-300 transform translate-y-full flex flex-col justify-end pointer-events-auto">
+    <div class="bg-surface-container-lowest rounded-t-3xl shadow-2xl p-space-md border-t border-surface-variant flex flex-col max-h-[88vh] pb-[calc(env(safe-area-inset-bottom,0px)+1.5rem)]">
+      
+      <!-- Drag handle indicator -->
+      <div id="info-sheet-drag-handle" class="w-12 h-1.5 bg-outline-variant/60 rounded-full mx-auto mb-2 cursor-grab py-0.5"></div>
+
+      <!-- Sheet Header -->
+      <div class="flex items-start justify-between pb-3 border-b border-surface-variant shrink-0">
+        <div class="space-y-1 pr-2">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-bold">
+            <span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+            <span>Versi 1.0.0 • Kalkulator Pintar 2025</span>
+          </div>
+          <h3 id="info-sheet-title" class="font-headline-sm text-headline-sm font-bold text-on-surface">Tentang Faraid Simulator</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Panduan &amp; asas perundangan pewarisan Islam Malaysia</p>
+        </div>
+        <button id="close-info-sheet-btn" aria-label="Tutup maklumat aplikasi" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-container active:bg-surface-container-high text-on-surface-variant transition-colors shrink-0">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Sheet Scrollable Content -->
+      <div class="overflow-y-auto space-y-4 py-3 pr-1">
+        
+        <!-- App Purpose Description -->
+        <div class="bg-surface-container-low rounded-2xl p-3.5 space-y-1.5">
+          <div class="flex items-center gap-2 text-primary font-label-md text-label-md font-bold">
+            <span class="material-symbols-outlined text-[20px]">balance</span>
+            <span>Tujuan Aplikasi</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+            Faraid Simulator Malaysia direka khusus sebagai panduan pintar dan telus untuk membantu waris, pentadbir harta, dan masyarakat memahami pengiraan pecahan pusaka secara berperingkat, tepat, dan 100% luar talian (offline) berlandaskan hukum Syarak.
+          </p>
+        </div>
+
+        <!-- Cara Penggunaan: 3 Langkah Mudah -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-label-lg text-label-lg font-bold text-on-surface flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[18px] text-primary">route</span>
+              Cara Penggunaan (3 Langkah)
+            </h4>
+            <span class="font-label-sm text-label-sm text-on-surface-variant">3-Step Flow</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-lowest border border-surface-variant">
+              <div class="w-7 h-7 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+              <div>
+                <span class="font-label-md text-label-md font-bold text-on-surface block">Nilai Harta Bersih</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block mt-0.5">Masukkan harta kasar, tolak kos pengurusan jenazah, hutang piutang (Hutang Allah &amp; Manusia), dan wasiat (had maksimum ⅓).</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-lowest border border-surface-variant">
+              <div class="w-7 h-7 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+              <div>
+                <span class="font-label-md text-label-md font-bold text-on-surface block">Pilih &amp; Tetapkan Waris</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block mt-0.5">Tentukan jantina si mati serta waris utama yang masih hidup (pasangan, anak lelaki/perempuan, bapa, dan ibu).</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-lowest border border-surface-variant">
+              <div class="w-7 h-7 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+              <div>
+                <span class="font-label-md text-label-md font-bold text-on-surface block">Semak Pecahan &amp; Bahagian</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block mt-0.5">Periksa pecahan Asal Mas'alah, kadar peratusan, nilai RM setiap waris, dan kongsi ringkasan rasmi.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal Basis (Asas Hukum & Perundangan) -->
+        <div class="space-y-2">
+          <h4 class="font-label-lg text-label-lg font-bold text-on-surface flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px] text-primary">gavel</span>
+            Asas Hukum &amp; Perundangan Malaysia
+          </h4>
+          <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-variant space-y-2 text-on-surface">
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+              <p class="font-body-sm text-body-sm leading-relaxed">
+                <strong>Mazhab Syafi'i:</strong> Berteraskan hukum Faraid al-Qur'an (Surah An-Nisa' ayat 11, 12, dan 176) mengikut konsensus ulama Mazhab Syafi'i di Malaysia bagi kategori <em>Ashabul Furud</em> dan <em>‘Asabah</em>.
+              </p>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+              <p class="font-body-sm text-body-sm leading-relaxed">
+                <strong>Akta Harta Pusaka Kecil (Pembahagian) 1955 [Akta 98]:</strong> Rujukan bidang kuasa Unit Pembahagian Pusaka Kecil (JKPTG) bagi harta si mati yang mempunyai harta tak alih bernilai tidak melebihi RM5,000,000.
+              </p>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+              <p class="font-body-sm text-body-sm leading-relaxed">
+                <strong>Enakmen Pentadbiran Agama Islam Negeri:</strong> Bidang kuasa Mahkamah Syariah negeri-negeri di Malaysia untuk mengeluarkan Perintah Sijil Faraid rasmi bagi membuktikan hak waris sah.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal Disclaimer -->
+        <div class="p-3.5 rounded-xl bg-amber-500/10 border border-secondary/30 text-on-surface space-y-1">
+          <div class="flex items-center gap-1.5 font-label-md text-label-md font-bold text-secondary">
+            <span class="material-symbols-outlined text-[18px]">warning</span>
+            <span>Penafian Undang-Undang (Disclaimer)</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Pengiraan dalam aplikasi ini adalah <strong>simulasi sahaja</strong> untuk tujuan kefahaman awal dan perancangan awal pewarisan. Aplikasi ini bukan perakuan rasmi atau nasihat guaman Syariah. Sila rujuk Pejabat Agama Islam Negeri, Bahagian Pusaka Kecil (JKPTG), Mahkamah Syariah, atau Peguam Syarie bertauliah bagi urusan undang-undang rasmi.
+          </p>
+        </div>
+
+        <!-- Official References & Actions -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-label-lg text-label-lg font-bold text-on-surface flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[18px] text-primary">account_balance</span>
+              Pihak Berkuasa &amp; Saluran Rasmi
+            </h4>
+            <span class="font-label-sm text-label-sm text-on-surface-variant">Official Agencies</span>
+          </div>
+          
+          <div class="space-y-2">
+            <!-- JKSM Card -->
+            <div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <span class="font-label-md text-label-md font-bold text-on-surface block">Jabatan Kehakiman Syariah Malaysia (JKSM)</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block truncate">Portal e-Syariah &amp; Pengesahan Waris Faraid</span>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" data-ref-action="share" data-title="Jabatan Kehakiman Syariah Malaysia (JKSM)" data-url="https://www.jksm.gov.my" class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container active:bg-surface-container-high transition-colors" aria-label="Kongsi maklumat JKSM">
+                  <span class="material-symbols-outlined text-[18px]">share</span>
+                </button>
+                <button type="button" data-ref-action="open" data-url="https://www.jksm.gov.my" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 transition-colors" aria-label="Buka portal JKSM">
+                  <span>Layari</span>
+                  <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- JKPTG Card -->
+            <div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <span class="font-label-md text-label-md font-bold text-on-surface block">JKPTG - Bahagian Pembahagian Pusaka Kecil</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block truncate">Pengurusan Harta Tak Alih &lt; RM5 Juta</span>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" data-ref-action="share" data-title="Bahagian Pembahagian Pusaka Kecil (JKPTG)" data-url="https://www.jkptg.gov.my" class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container active:bg-surface-container-high transition-colors" aria-label="Kongsi maklumat JKPTG">
+                  <span class="material-symbols-outlined text-[18px]">share</span>
+                </button>
+                <button type="button" data-ref-action="open" data-url="https://www.jkptg.gov.my" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 transition-colors" aria-label="Buka portal JKPTG">
+                  <span>Layari</span>
+                  <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Amanah Raya Card -->
+            <div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <span class="font-label-md text-label-md font-bold text-on-surface block">Amanah Raya Berhad (ARB)</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block truncate">Pentadbiran Pusaka Alih &amp; Wasiat Orang Islam</span>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" data-ref-action="share" data-title="Amanah Raya Berhad (ARB)" data-url="https://www.amanahraya.my" class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container active:bg-surface-container-high transition-colors" aria-label="Kongsi maklumat Amanah Raya">
+                  <span class="material-symbols-outlined text-[18px]">share</span>
+                </button>
+                <button type="button" data-ref-action="open" data-url="https://www.amanahraya.my" class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 transition-colors" aria-label="Buka portal Amanah Raya">
+                  <span>Layari</span>
+                  <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Button -->
+      <div class="pt-3 border-t border-surface-variant shrink-0">
+        <button id="dismiss-info-sheet-btn" type="button" class="w-full py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold text-center transition-colors">
+          Tutup
+        </button>
+      </div>
+
+    </div>
   </div>
 </div>
 
+<!-- Material-style Bottom Sheet: Profil & Tetapan -->
+<div id="profile-sheet" class="fixed inset-0 z-50 transition-all duration-300 pointer-events-none opacity-0 invisible" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="profile-sheet-title">
+  <!-- Backdrop -->
+  <div id="profile-sheet-backdrop" class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm transition-opacity duration-300"></div>
+
+  <!-- Sheet Panel -->
+  <div id="profile-sheet-panel" class="absolute inset-x-0 bottom-0 max-w-md mx-auto w-full transition-transform duration-300 transform translate-y-full flex flex-col justify-end pointer-events-auto">
+    <div class="bg-surface-container-lowest rounded-t-3xl shadow-2xl p-space-md border-t border-surface-variant flex flex-col max-h-[88vh] pb-[calc(env(safe-area-inset-bottom,0px)+1.5rem)]">
+      
+      <!-- Drag handle indicator -->
+      <div id="profile-sheet-drag-handle" class="w-12 h-1.5 bg-outline-variant/60 rounded-full mx-auto mb-2 cursor-grab py-0.5"></div>
+
+      <!-- Sheet Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-surface-variant shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-full bg-primary-fixed text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-[24px]">manage_accounts</span>
+          </div>
+          <div>
+            <h3 id="profile-sheet-title" class="font-headline-sm text-headline-sm font-bold text-on-surface">Profil &amp; Tetapan</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Konfigurasi pengguna &amp; storan peranti</p>
+          </div>
+        </div>
+        <button id="close-profile-sheet-btn" aria-label="Tutup tetapan profil" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-container active:bg-surface-container-high text-on-surface-variant transition-colors shrink-0">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Sheet Scrollable Form Content -->
+      <div class="overflow-y-auto space-y-4 py-3 pr-1">
+
+        <!-- Display Name Field -->
+        <div class="space-y-1.5">
+          <label for="profile-name-input" class="font-label-md text-label-md font-bold text-on-surface block">
+            Nama Paparan / Display Name
+          </label>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Pilihan. Digunakan sebagai nama rujukan pada perkongsian dan penyata ringkasan simulasi.
+          </p>
+          <div class="relative rounded-xl bg-surface-container-low px-3.5 py-2.5 border border-surface-variant focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+            <input id="profile-name-input" type="text" maxlength="50" class="w-full bg-transparent font-label-lg text-label-lg text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none" placeholder="cth: Ahmad Razif" />
+          </div>
+        </div>
+
+        <!-- Language Preference -->
+        <div class="space-y-1.5">
+          <label class="font-label-md text-label-md font-bold text-on-surface block">
+            Bahasa Pilihan / Preferred Language
+          </label>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Pilih bahasa paparan antaramuka aplikasi.
+          </p>
+          <div class="grid grid-cols-2 gap-2 p-1 bg-surface-container-low rounded-xl border border-surface-variant">
+            <button type="button" id="lang-btn-ms" data-lang="ms" class="py-2.5 px-3 rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 transition-all bg-primary text-on-primary shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">check</span>
+              <span>Bahasa Melayu</span>
+            </button>
+            <button type="button" id="lang-btn-en" data-lang="en" class="py-2.5 px-3 rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container">
+              <span class="material-symbols-outlined text-[18px] opacity-0">check</span>
+              <span>English</span>
+            </button>
+          </div>
+          <span class="font-label-sm text-label-sm text-on-surface-variant block mt-1">
+            * Bahasa Melayu kekal sebagai bahasa primer rujukan hukum Syarak Malaysia.
+          </span>
+        </div>
+
+        <!-- Privacy & Offline Storage Callout -->
+        <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-variant space-y-1.5">
+          <div class="flex items-center gap-2 text-primary font-label-md text-label-md font-bold">
+            <span class="material-symbols-outlined text-[18px]">shield</span>
+            <span>Privasi &amp; Storan Tempatan (Offline-First)</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Data anda tidak pernah dihantar ke mana-mana pelayan luar. Semua rekod nilai harta, senarai waris, dan tetapan disimpan semata-mata di dalam storan setempat peranti anda.
+          </p>
+        </div>
+
+        <!-- Destructive Action: Clear All Simulation Data -->
+        <div class="p-3.5 rounded-xl bg-error-container/20 border border-error/30 space-y-2">
+          <div class="flex items-center gap-2 text-error font-label-md text-label-md font-bold">
+            <span class="material-symbols-outlined text-[20px]">delete_sweep</span>
+            <span>Pengurusan Data Simulasi</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Padamkan semua pengiraan nilai harta, draf waris, dan senarai kes tersimpan dalam aplikasi ini.
+          </p>
+          <button id="open-clear-data-dialog-btn" type="button" class="w-full py-2.5 px-3 rounded-lg bg-error-container hover:bg-error-container/80 active:bg-error-container text-error font-label-md text-label-md font-semibold flex items-center justify-center gap-2 transition-colors">
+            <span class="material-symbols-outlined text-[18px]">delete_forever</span>
+            <span>Padam Semua Data Simulasi</span>
+          </button>
+        </div>
+
+        <!-- App Version & Link to About -->
+        <div class="pt-1 flex items-center justify-between border-t border-surface-variant text-on-surface-variant">
+          <span class="font-body-sm text-body-sm">Faraid Simulator v1.0.0</span>
+          <button id="open-about-from-profile-btn" type="button" class="text-primary hover:underline font-label-sm text-label-sm font-semibold flex items-center gap-1">
+            <span>Tentang Aplikasi &amp; Rujukan</span>
+            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Action Save Button -->
+      <div class="pt-3 border-t border-surface-variant shrink-0 flex items-center gap-2">
+        <button id="cancel-profile-btn" type="button" class="px-4 py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold text-center transition-colors">
+          Batal
+        </button>
+        <button id="save-profile-btn" type="button" class="flex-1 py-3 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold text-center transition-all shadow-sm active:scale-[0.98]">
+          Simpan Tetapan
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Dialog Modal for Clear All Simulation Data Confirmation -->
+<div id="clear-all-data-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-200 pointer-events-none opacity-0 invisible" role="dialog" aria-modal="true" aria-labelledby="clear-all-data-title">
+  <div id="clear-all-data-backdrop" class="absolute inset-0 bg-on-surface/50 backdrop-blur-sm transition-opacity duration-200"></div>
+  <div id="clear-all-data-panel" class="relative z-10 bg-surface-container-lowest rounded-2xl p-space-md shadow-2xl max-w-sm w-full border border-surface-variant transition-all duration-200 transform scale-95 flex flex-col space-y-3 pointer-events-auto">
+    <div class="flex items-center gap-2 text-error pb-1">
+      <span class="material-symbols-outlined text-[24px]">warning</span>
+      <h3 id="clear-all-data-title" class="font-headline-sm text-headline-sm font-bold text-on-surface">Padam Semua Data?</h3>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+      Adakah anda pasti mahu memadamkan semua rekod simulasi, draf dan data pengiraan tersimpan? Tindakan ini tidak boleh diundur dan semua data setempat peranti akan dikosongkan.
+    </p>
+    <div class="flex items-center justify-end gap-2 pt-2">
+      <button id="cancel-clear-all-data-btn" type="button" class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors">
+        Batal
+      </button>
+      <button id="confirm-clear-all-data-btn" type="button" class="px-4 py-2 rounded-lg bg-error hover:bg-error/90 text-on-error font-label-md text-label-md font-semibold transition-colors shadow-sm">
+        Ya, Padam Semua
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="faraid_app.js"></script>
 <script>
   // Simple micro-interaction for shortcut touch ripple feedback
   document.querySelectorAll('a, button').forEach(el => {
@@ -730,4 +1061,292 @@
     // Sync initial state from localStorage
     syncCardsWithStorage();
   })();
-</script><script src="faraid_app.js"></script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(26,32,44,0.06)]" data-active-classes="[&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold"><div class="flex justify-around items-center h-20 px-space-xs max-w-md mx-auto"><a aria-current="page" class="group flex flex-col items-center justify-center gap-1 w-20 py-1 transition-all select-none [&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold" data-path="utama" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">home</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Utama<span class="block text-[9px] font-normal opacity-80 leading-none">Home</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="simulasi" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">calculate</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Simulasi<span class="block text-[9px] font-normal opacity-80 leading-none">Simulate</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="panduan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">menu_book</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Panduan<span class="block text-[9px] font-normal opacity-80 leading-none">Learn</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="tersimpan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">bookmark</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Tersimpan<span class="block text-[9px] font-normal opacity-80 leading-none">Saved</span></span></a></div></nav></body></html>
+
+  // Material-style Bottom Sheets for Info & User/Profile Header Icons
+  (function initHeaderSheets() {
+    // Info Sheet Elements
+    const infoBtn = document.getElementById('info-header-btn');
+    const infoSheet = document.getElementById('info-sheet');
+    const infoBackdrop = document.getElementById('info-sheet-backdrop');
+    const infoPanel = document.getElementById('info-sheet-panel');
+    const infoDragHandle = document.getElementById('info-sheet-drag-handle');
+    const closeInfoBtn = document.getElementById('close-info-sheet-btn');
+    const dismissInfoBtn = document.getElementById('dismiss-info-sheet-btn');
+
+    // Profile Sheet Elements
+    const profileBtn = document.getElementById('profile-header-btn');
+    const profileSheet = document.getElementById('profile-sheet');
+    const profileBackdrop = document.getElementById('profile-sheet-backdrop');
+    const profilePanel = document.getElementById('profile-sheet-panel');
+    const profileDragHandle = document.getElementById('profile-sheet-drag-handle');
+    const closeProfileBtn = document.getElementById('close-profile-sheet-btn');
+    const cancelProfileBtn = document.getElementById('cancel-profile-btn');
+    const saveProfileBtn = document.getElementById('save-profile-btn');
+    const profileNameInput = document.getElementById('profile-name-input');
+    const langBtnMs = document.getElementById('lang-btn-ms');
+    const langBtnEn = document.getElementById('lang-btn-en');
+    const openAboutFromProfileBtn = document.getElementById('open-about-from-profile-btn');
+    const openClearDataDialogBtn = document.getElementById('open-clear-data-dialog-btn');
+
+    // Avatar & Greeting elements
+    const avatarIcon = document.getElementById('header-avatar-icon');
+    const avatarInitial = document.getElementById('header-avatar-initial');
+    const greetingHeading = document.getElementById('greeting-heading');
+
+    // Clear Data Confirmation Dialog Elements
+    const clearDataModal = document.getElementById('clear-all-data-modal');
+    const clearDataBackdrop = document.getElementById('clear-all-data-backdrop');
+    const clearDataPanel = document.getElementById('clear-all-data-panel');
+    const cancelClearDataBtn = document.getElementById('cancel-clear-all-data-btn');
+    const confirmClearDataBtn = document.getElementById('confirm-clear-all-data-btn');
+
+    let currentSelectedLang = 'ms';
+
+    // Reusable Bottom Sheet Controller Factory
+    function setupBottomSheet(sheetEl, panelEl, dragHandleEl, onOpened, onClosed) {
+      if (!sheetEl || !panelEl) return { open: () => {}, close: () => {} };
+
+      function open() {
+        if (window.FaraidApp && window.FaraidApp.vibrate) {
+          window.FaraidApp.vibrate(30);
+        }
+        if (typeof onOpened === 'function') onOpened();
+        sheetEl.classList.remove('invisible', 'pointer-events-none');
+        sheetEl.classList.add('visible', 'pointer-events-auto');
+        panelEl.style.transform = '';
+        requestAnimationFrame(() => {
+          sheetEl.classList.remove('opacity-0');
+          sheetEl.classList.add('opacity-100');
+          panelEl.classList.remove('translate-y-full');
+          panelEl.classList.add('translate-y-0');
+        });
+      }
+
+      function close() {
+        sheetEl.classList.remove('opacity-100');
+        sheetEl.classList.add('opacity-0');
+        panelEl.classList.remove('translate-y-0');
+        panelEl.classList.add('translate-y-full');
+        setTimeout(() => {
+          sheetEl.classList.remove('visible', 'pointer-events-auto');
+          sheetEl.classList.add('invisible', 'pointer-events-none');
+          panelEl.style.transform = '';
+          if (typeof onClosed === 'function') onClosed();
+        }, 280);
+      }
+
+      // Drag-down gesture dismiss
+      let startY = 0;
+      let currentY = 0;
+      let isDragging = false;
+      const dragEl = dragHandleEl || panelEl;
+
+      dragEl.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        currentY = startY;
+        isDragging = true;
+        panelEl.style.transition = 'none';
+      }, { passive: true });
+
+      dragEl.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        if (deltaY > 0) {
+          panelEl.style.transform = `translateY(${deltaY}px)`;
+        }
+      }, { passive: true });
+
+      dragEl.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        panelEl.style.transition = 'transform 0.3s cubic-bezier(0.2, 0, 0, 1)';
+        const deltaY = currentY - startY;
+        if (deltaY > 80) {
+          close();
+          if (window.FaraidApp && window.FaraidApp.vibrate) {
+            window.FaraidApp.vibrate(20);
+          }
+        } else {
+          panelEl.style.transform = 'translateY(0)';
+        }
+        startY = 0;
+        currentY = 0;
+      }, { passive: true });
+
+      return { open, close };
+    }
+
+    const infoSheetCtrl = setupBottomSheet(infoSheet, infoPanel, infoDragHandle);
+    const profileSheetCtrl = setupBottomSheet(profileSheet, profilePanel, profileDragHandle, () => {
+      // populate from current prefs
+      const prefs = window.FaraidApp ? window.FaraidApp.getUserPrefs() : { displayName: '', language: 'ms' };
+      if (profileNameInput) profileNameInput.value = prefs.displayName || '';
+      setLanguageUI(prefs.language || 'ms');
+    });
+
+    function setLanguageUI(lang) {
+      currentSelectedLang = lang === 'en' ? 'en' : 'ms';
+      if (!langBtnMs || !langBtnEn) return;
+      if (currentSelectedLang === 'ms') {
+        langBtnMs.className = 'py-2.5 px-3 rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 transition-all bg-primary text-on-primary shadow-sm';
+        const msCheck = langBtnMs.querySelector('.material-symbols-outlined');
+        if (msCheck) msCheck.classList.remove('opacity-0');
+
+        langBtnEn.className = 'py-2.5 px-3 rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container';
+        const enCheck = langBtnEn.querySelector('.material-symbols-outlined');
+        if (enCheck) enCheck.classList.add('opacity-0');
+      } else {
+        langBtnEn.className = 'py-2.5 px-3 rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 transition-all bg-primary text-on-primary shadow-sm';
+        const enCheck = langBtnEn.querySelector('.material-symbols-outlined');
+        if (enCheck) enCheck.classList.remove('opacity-0');
+
+        langBtnMs.className = 'py-2.5 px-3 rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container';
+        const msCheck = langBtnMs.querySelector('.material-symbols-outlined');
+        if (msCheck) msCheck.classList.add('opacity-0');
+      }
+    }
+
+    function applyUserPrefsToHeader() {
+      const prefs = window.FaraidApp ? window.FaraidApp.getUserPrefs() : { displayName: '' };
+      const name = (prefs.displayName || '').trim();
+      if (name) {
+        if (avatarIcon) avatarIcon.classList.add('hidden');
+        if (avatarInitial) {
+          avatarInitial.textContent = name.charAt(0).toUpperCase();
+          avatarInitial.classList.remove('hidden');
+        }
+        if (greetingHeading) {
+          greetingHeading.textContent = `Assalamualaikum, ${name}`;
+        }
+      } else {
+        if (avatarIcon) avatarIcon.classList.remove('hidden');
+        if (avatarInitial) avatarInitial.classList.add('hidden');
+        if (greetingHeading) {
+          greetingHeading.textContent = 'Assalamualaikum, Selamat Datang';
+        }
+      }
+    }
+
+    // Modal helpers for Clear All Data Dialog
+    function openClearDataDialog() {
+      if (!clearDataModal || !clearDataPanel) return;
+      clearDataModal.classList.remove('invisible', 'pointer-events-none');
+      clearDataModal.classList.add('visible', 'pointer-events-auto');
+      requestAnimationFrame(() => {
+        clearDataModal.classList.remove('opacity-0');
+        clearDataModal.classList.add('opacity-100');
+        clearDataPanel.classList.remove('scale-95');
+        clearDataPanel.classList.add('scale-100');
+      });
+    }
+
+    function closeClearDataDialog() {
+      if (!clearDataModal || !clearDataPanel) return;
+      clearDataModal.classList.remove('opacity-100');
+      clearDataModal.classList.add('opacity-0');
+      clearDataPanel.classList.remove('scale-100');
+      clearDataPanel.classList.add('scale-95');
+      setTimeout(() => {
+        clearDataModal.classList.remove('visible', 'pointer-events-auto');
+        clearDataModal.classList.add('invisible', 'pointer-events-none');
+      }, 200);
+    }
+
+    // Info Sheet Listeners
+    infoBtn?.addEventListener('click', () => infoSheetCtrl.open());
+    closeInfoBtn?.addEventListener('click', () => infoSheetCtrl.close());
+    dismissInfoBtn?.addEventListener('click', () => infoSheetCtrl.close());
+    infoBackdrop?.addEventListener('click', () => infoSheetCtrl.close());
+
+    // Official reference buttons in Info Sheet
+    infoSheet?.addEventListener('click', (e) => {
+      const actionBtn = e.target.closest('[data-ref-action]');
+      if (!actionBtn) return;
+      const action = actionBtn.dataset.refAction;
+      const url = actionBtn.dataset.url;
+      const title = actionBtn.dataset.title;
+
+      if (action === 'open' && url) {
+        if (window.FaraidApp && window.FaraidApp.openExternalUrl) {
+          window.FaraidApp.openExternalUrl(url);
+        } else {
+          window.open(url, '_blank');
+        }
+      } else if (action === 'share' && (url || title)) {
+        const shareTitle = `Rujukan Rasmi: ${title}`;
+        const shareBody = `Rujukan Rasmi Pengurusan Faraid & Pusaka Malaysia:\n${title}\nPortal Rasmi: ${url}\n\nFaraid Simulator Malaysia`;
+        if (window.FaraidApp && window.FaraidApp.share) {
+          window.FaraidApp.share(shareTitle, shareBody);
+        }
+      }
+    });
+
+    // Profile Sheet Listeners
+    profileBtn?.addEventListener('click', () => profileSheetCtrl.open());
+    closeProfileBtn?.addEventListener('click', () => profileSheetCtrl.close());
+    cancelProfileBtn?.addEventListener('click', () => profileSheetCtrl.close());
+    profileBackdrop?.addEventListener('click', () => profileSheetCtrl.close());
+
+    langBtnMs?.addEventListener('click', () => setLanguageUI('ms'));
+    langBtnEn?.addEventListener('click', () => setLanguageUI('en'));
+
+    saveProfileBtn?.addEventListener('click', () => {
+      const name = (profileNameInput?.value || '').trim();
+      if (window.FaraidApp) {
+        window.FaraidApp.setUserPrefs({
+          displayName: name,
+          language: currentSelectedLang
+        });
+        window.FaraidApp.notify('Tetapan disimpan.');
+        if (window.FaraidApp.vibrate) window.FaraidApp.vibrate(25);
+      }
+      applyUserPrefsToHeader();
+      profileSheetCtrl.close();
+    });
+
+    openAboutFromProfileBtn?.addEventListener('click', () => {
+      profileSheetCtrl.close();
+      setTimeout(() => infoSheetCtrl.open(), 200);
+    });
+
+    // Clear All Data Flow
+    openClearDataDialogBtn?.addEventListener('click', openClearDataDialog);
+    cancelClearDataBtn?.addEventListener('click', closeClearDataDialog);
+    clearDataBackdrop?.addEventListener('click', closeClearDataDialog);
+
+    confirmClearDataBtn?.addEventListener('click', () => {
+      if (window.FaraidApp) {
+        window.FaraidApp.clearAllSimulationData();
+        window.FaraidApp.notify('Semua data simulasi telah dipadam.');
+        if (window.FaraidApp.vibrate) window.FaraidApp.vibrate(40);
+      }
+
+      // Clear cards from UI and show empty state
+      const recentCardsContainer = document.getElementById('recent-cards');
+      const noRecentCardsState = document.getElementById('no-recent-cards');
+      if (recentCardsContainer) {
+        recentCardsContainer.querySelectorAll('[data-case-id]').forEach(card => card.remove());
+      }
+      if (noRecentCardsState) {
+        noRecentCardsState.classList.remove('hidden');
+        noRecentCardsState.classList.add('flex');
+      }
+
+      closeClearDataDialog();
+      profileSheetCtrl.close();
+    });
+
+    // Escape key listener for newly added sheets
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        infoSheetCtrl.close();
+        profileSheetCtrl.close();
+        closeClearDataDialog();
+      }
+    });
+
+    // Initial setup
+    applyUserPrefsToHeader();
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(26,32,44,0.06)]" data-active-classes="[&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold"><div class="flex justify-around items-center h-20 px-space-xs max-w-md mx-auto"><a aria-current="page" class="group flex flex-col items-center justify-center gap-1 w-20 py-1 transition-all select-none [&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold" data-path="utama" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">home</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Utama<span class="block text-[9px] font-normal opacity-80 leading-none">Home</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="simulasi" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">calculate</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Simulasi<span class="block text-[9px] font-normal opacity-80 leading-none">Simulate</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="panduan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">menu_book</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Panduan<span class="block text-[9px] font-normal opacity-80 leading-none">Learn</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="tersimpan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">bookmark</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Tersimpan<span class="block text-[9px] font-normal opacity-80 leading-none">Saved</span></span></a></div></nav></body></html>

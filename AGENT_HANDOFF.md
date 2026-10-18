@@ -103,6 +103,16 @@ The bridge is bound to `window.AndroidBridge` on the web runtime.
 - **Parameters**: `page` (String) - Filename located in `file:///android_asset/www/` (e.g. `"langkah1.html"`).
 - **Side Effect**: Dispatches URL loading onto the Android main UI thread safely.
 
+### 3.5 `openExternalUrl(url: String)`
+- **Parameters**: `url` (String) - Full web URL (e.g. `"https://www.jksm.gov.my"`).
+- **Side Effect**: Spawns an external browser Intent (`Intent.ACTION_VIEW`) without navigating away from the hybrid application shell.
+- **Example**:
+  ```javascript
+  if (window.AndroidBridge && window.AndroidBridge.openExternalUrl) {
+    window.AndroidBridge.openExternalUrl('https://www.jksm.gov.my');
+  }
+  ```
+
 ---
 
 ## 4. Verification & Debugging Runbook

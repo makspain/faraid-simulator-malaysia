@@ -52,4 +52,14 @@ class WebAppInterface(private val context: Context, private val webView: WebView
             webView.loadUrl("file:///android_asset/www/$page")
         }
     }
+
+    @JavascriptInterface
+    fun openExternalUrl(url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            context.startActivity(intent)
+        } catch (_: Exception) {}
+    }
 }

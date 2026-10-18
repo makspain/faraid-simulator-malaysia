@@ -7,6 +7,13 @@ window.FaraidApp = (function () {
   const STORAGE_ESTATE_KEY = 'faraid_estate_data';
   const STORAGE_RESULT_KEY = 'faraid_result_data';
   const STORAGE_SAVED_CASES = 'faraid_saved_cases';
+  const STORAGE_USER_PREFS = 'faraid_user_prefs';
+
+  const defaultUserPrefs = {
+    displayName: '',
+    language: 'ms',
+    lastUpdated: null
+  };
 
   // Default initial values
   const defaultEstate = {
@@ -574,10 +581,52 @@ window.FaraidApp = (function () {
   function share(title, text) {
     if (window.AndroidBridge && window.AndroidBridge.shareText) {
       window.AndroidBridge.shareText(title, text);
-    } else if (navigator.share) {
+    } else if (typeof navigator !== 'undefined' && navigator.share) {
       navigator.share({ title: title, text: text }).catch(() => {});
     } else {
       notify('Teks ringkasan telah disalin.');
+    }
+  }
+
+  function getUserPrefs() {
+    try {
+      const stored = localStorage.getItem(STORAGE_USER_PREFS);
+      if (stored) {
+        return Object.assign({}, defaultUserPrefs, JSON.parse(stored));
+      }
+    } catch (e) {}
+    return Object.assign({}, defaultUserPrefs);
+  }
+
+  function setUserPrefs(prefs) {
+    try {
+      const current = getUserPrefs();
+      const updated = Object.assign({}, current, prefs, {
+        lastUpdated: Date.now()
+      });
+      localStorage.setItem(STORAGE_USER_PREFS, JSON.stringify(updated));
+      return updated;
+    } catch (e) {
+      return defaultUserPrefs;
+    }
+  }
+
+  function clearAllSimulationData() {
+    try {
+      localStorage.removeItem(STORAGE_ESTATE_KEY);
+      localStorage.removeItem(STORAGE_RESULT_KEY);
+      localStorage.setItem(STORAGE_SAVED_CASES, '[]');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function openExternalUrl(url) {
+    if (window.AndroidBridge && window.AndroidBridge.openExternalUrl) {
+      window.AndroidBridge.openExternalUrl(url);
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
   }
 
@@ -599,12 +648,17 @@ window.FaraidApp = (function () {
     renameSavedCase,
     loadCaseForAction,
     shareSavedCase,
+    getUserPrefs,
+    setUserPrefs,
+    clearAllSimulationData,
+    openExternalUrl,
     vibrate,
     notify,
     share,
     defaultEstate,
     defaultHeirs,
-    defaultSavedCases
+    defaultSavedCases,
+    defaultUserPrefs
   };
 })();
 

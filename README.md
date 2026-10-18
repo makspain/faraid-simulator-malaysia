@@ -45,7 +45,7 @@ The project is structured as a decoupled, high-performance hybrid Android applic
   - Registers [`OnBackPressedCallback`](file:///c:/Users/ash_s/develop/projects/Faraid-Sim-Malaysia/app/src/main/java/com/faraid/simulator/MainActivity.kt#L37-L53) to support multi-step hierarchical back-navigation without abruptly quitting the application (`keputusan.html` $\rightarrow$ `langkah2.html` $\rightarrow$ `langkah1.html` $\rightarrow$ `utama.html`).
 - [`WebAppInterface.kt`](file:///c:/Users/ash_s/develop/projects/Faraid-Sim-Malaysia/app/src/main/java/com/faraid/simulator/WebAppInterface.kt):
   - Bridges JavaScript calls to Android native system services via the `@JavascriptInterface` annotation.
-  - Injected into the browser DOM under the global identifier `window.AndroidBridge`.
+  - Injected into the browser DOM under the global identifier `window.AndroidBridge` (`showToast`, `shareText`, `vibrate`, `navigateTo`, `openExternalUrl`).
 
 ### 2.2 Web Application Runtime
 All assets reside in [`app/src/main/assets/www/`](file:///c:/Users/ash_s/develop/projects/Faraid-Sim-Malaysia/app/src/main/assets/www/):

@@ -40,7 +40,7 @@ flowchart TD
   - Configures `OnBackPressedCallback` to maintain an in-app hierarchical navigation stack across Faraid steps (`keputusan.html` $\rightarrow$ `langkah2.html` $\rightarrow$ `langkah1.html` $\rightarrow$ `utama.html`).
 - **`WebAppInterface.kt`**:
   - Registered as `window.AndroidBridge` within the JavaScript context.
-  - Exposes thread-safe native services (`showToast`, `shareText`, `vibrate`, `navigateTo`).
+  - Exposes thread-safe native services (`showToast`, `shareText`, `vibrate`, `navigateTo`, `openExternalUrl`).
 
 ### 2.2 Web Runtime Layer
 - Fully offline-ready HTML5/Tailwind/ES6 static assets served directly from `file:///android_asset/www/`.
@@ -190,6 +190,14 @@ Session data is stored in the browser `localStorage` engine within the WebView s
       "totalHeirCount": 4
     }
   ]
+  ```
+- `faraid_user_prefs`:
+  ```json
+  {
+    "displayName": "",
+    "language": "ms",
+    "lastUpdated": 1729212345678
+  }
   ```
 
 ---
