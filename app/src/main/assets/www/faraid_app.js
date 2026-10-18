@@ -309,39 +309,87 @@ window.FaraidApp = (function () {
     };
   }
 
+  let isNavigating = false;
+
+  function updateBottomNav(activePath) {
+    document.querySelectorAll('nav a[data-path]').forEach(link => {
+      const path = link.getAttribute('data-path');
+      if (path === activePath) {
+        link.setAttribute('aria-current', 'page');
+        link.className = 'group flex flex-col items-center justify-center gap-1 w-20 py-1 transition-all select-none [&_.indicator]:bg-tertiary-fixed [&_.indicator]:text-primary text-primary font-semibold';
+      } else {
+        link.removeAttribute('aria-current');
+        link.className = 'group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none';
+      }
+    });
+  }
+
+  function navigateTo(page) {
+    if (isNavigating) return;
+    isNavigating = true;
+    setTimeout(() => { isNavigating = false; }, 800);
+
+    if (page === 'langkah1.html') {
+      updateBottomNav('simulasi');
+    } else if (page === 'panduan.html') {
+      updateBottomNav('panduan');
+    } else if (page === 'utama.html') {
+      updateBottomNav('utama');
+    }
+
+    if (window.AndroidBridge && typeof window.AndroidBridge.navigateTo === 'function') {
+      window.AndroidBridge.navigateTo(page);
+    } else {
+      window.location.href = page;
+    }
+  }
+
   // Common UI Setup for Bottom Navigation & Quick Links
   function initNav() {
-    // Bottom Nav Links
-    document.querySelectorAll('nav a[data-path]').forEach(link => {
+    // Nav Links & Elements with data-path
+    document.querySelectorAll('[data-path]').forEach(link => {
+      if (link.dataset.navBound) return;
+      link.dataset.navBound = 'true';
       link.addEventListener('click', function (e) {
         e.preventDefault();
         const path = this.getAttribute('data-path');
         if (path === 'utama') {
-          window.location.href = 'utama.html';
+          navigateTo('utama.html');
         } else if (path === 'simulasi') {
-          window.location.href = 'langkah1.html';
+          navigateTo('langkah1.html');
         } else if (path === 'panduan') {
-          window.location.href = 'panduan.html';
+          navigateTo('panduan.html');
         } else if (path === 'tersimpan') {
           showSavedModal();
         }
       });
     });
 
-    // Top CTA & Shortcuts in Utama
+    // Top CTA & Shortcuts in Utama and Panduan
     document.querySelectorAll('a, button').forEach(el => {
+      if (el.dataset.navBound) return;
       const text = (el.textContent || '').trim().toLowerCase();
-      if (text.includes('mula kira sekarang') || text.includes('kalkulator pantas') || text.includes('sambung kira')) {
+      if (
+        text.includes('mula kira sekarang') ||
+        text.includes('kalkulator pantas') ||
+        text.includes('sambung kira') ||
+        text.includes('mula simulasi faraid') ||
+        text === 'kira' ||
+        text.startsWith('kira')
+      ) {
+        el.dataset.navBound = 'true';
         el.addEventListener('click', (e) => {
           e.preventDefault();
-          window.location.href = 'langkah1.html';
+          navigateTo('langkah1.html');
         });
       } else if (text.includes('panduan waris') || text.includes('pusat rujukan')) {
+        el.dataset.navBound = 'true';
         el.addEventListener('click', (e) => {
           e.preventDefault();
-          window.location.href = 'panduan.html';
+          navigateTo('panduan.html');
         });
       } else if (text.includes('kes tersimpan') || text.includes('lihat semua')) {
+        el.dataset.navBound = 'true';
         el.addEventListener('click', (e) => {
           e.preventDefault();
           showSavedModal();
@@ -452,9 +500,9 @@ window.FaraidApp = (function () {
     if (actionType === 'view' || item.status === 'completed') {
       const res = calculateFaraid(item.estate || defaultEstate, item.heirs || defaultHeirs);
       setResultData(res);
-      window.location.href = 'keputusan.html';
+      navigateTo('keputusan.html');
     } else {
-      window.location.href = 'langkah1.html';
+      navigateTo('langkah1.html');
     }
   }
 
@@ -557,7 +605,7 @@ window.FaraidApp = (function () {
     setEstateData(estate);
     const result = calculateFaraid(estate, defaultHeirs);
     setResultData(result);
-    window.location.href = 'keputusan.html';
+    navigateTo('keputusan.html');
   }
 
   // Native Android notifications / toasts
@@ -638,6 +686,8 @@ window.FaraidApp = (function () {
     calculateFaraid,
     formatRM,
     parseRM,
+    navigateTo,
+    updateBottomNav,
     initNav,
     showSavedModal,
     loadSampleCase,
@@ -662,6 +712,10 @@ window.FaraidApp = (function () {
   };
 })();
 
-document.addEventListener('DOMContentLoaded', function () {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function () {
+    window.FaraidApp.initNav();
+  });
+} else {
   window.FaraidApp.initNav();
-});
+}
