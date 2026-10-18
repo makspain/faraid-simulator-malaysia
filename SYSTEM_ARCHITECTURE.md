@@ -176,6 +176,21 @@ Session data is stored in the browser `localStorage` engine within the WebView s
     "totalHeirCount": 5
   }
   ```
+- `faraid_saved_cases`:
+  ```json
+  [
+    {
+      "id": "case-hj-ismail",
+      "title": "Keluarga Arwah Hj. Ismail",
+      "status": "completed",
+      "date": "24 Okt 2024",
+      "estate": { "gross": 550000.0, "funeral": 5000.0, "debt": 30000.0, "wasiat": 15000.0, "net": 500000.0 },
+      "heirs": { "deceasedGender": "male", "wifeCount": 1, "husbandCount": 0, "sons": 2, "daughters": 1, "fatherAlive": true, "motherAlive": true },
+      "summary": "Isteri (1) • 1/8 (RM 62.5k) | 2 Anak Lelaki, 1 Perempuan • Asabah (2:1)",
+      "totalHeirCount": 4
+    }
+  ]
+  ```
 
 ---
 

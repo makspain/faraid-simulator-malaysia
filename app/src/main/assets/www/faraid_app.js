@@ -343,6 +343,164 @@ window.FaraidApp = (function () {
     });
   }
 
+  const defaultSavedCases = [
+    {
+      id: 'case-hj-ismail',
+      title: 'Keluarga Arwah Hj. Ismail',
+      status: 'completed',
+      date: '24 Okt 2024',
+      estate: {
+        gross: 550000,
+        funeral: 5000,
+        debt: 30000,
+        wasiat: 15000,
+        net: 500000
+      },
+      heirs: {
+        deceasedGender: 'male',
+        wifeCount: 1,
+        husbandCount: 0,
+        sons: 2,
+        daughters: 1,
+        fatherAlive: true,
+        motherAlive: true
+      },
+      summary: 'Isteri (1) • 1/8 (RM 62.5k) | 2 Anak Lelaki, 1 Perempuan • Asabah (2:1)',
+      totalHeirCount: 4
+    },
+    {
+      id: 'case-puan-aminah',
+      title: 'Simulasi Ringkas Puan Aminah',
+      status: 'draft',
+      date: '12 Okt 2024',
+      estate: {
+        gross: 300000,
+        funeral: 5000,
+        debt: 35000,
+        wasiat: 10000,
+        net: 250000
+      },
+      heirs: {
+        deceasedGender: 'female',
+        wifeCount: 0,
+        husbandCount: 1,
+        sons: 0,
+        daughters: 1,
+        fatherAlive: false,
+        motherAlive: true
+      },
+      summary: 'Suami, Ibu & 1 Anak Perempuan',
+      totalHeirCount: 3
+    }
+  ];
+
+  function getSavedCases() {
+    try {
+      const stored = localStorage.getItem(STORAGE_SAVED_CASES);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {}
+    return defaultSavedCases;
+  }
+
+  function setSavedCases(cases) {
+    try {
+      localStorage.setItem(STORAGE_SAVED_CASES, JSON.stringify(cases));
+    } catch (e) {}
+  }
+
+  function getSavedCaseById(caseId) {
+    const list = getSavedCases();
+    return list.find(c => c.id === caseId) || defaultSavedCases.find(c => c.id === caseId) || null;
+  }
+
+  function deleteSavedCase(caseId) {
+    const list = getSavedCases().filter(c => c.id !== caseId);
+    setSavedCases(list);
+    return list;
+  }
+
+  function renameSavedCase(caseId, newTitle) {
+    const cleanTitle = (newTitle || '').trim();
+    if (!cleanTitle) return getSavedCases();
+    const list = getSavedCases().map(c => {
+      if (c.id === caseId) {
+        return Object.assign({}, c, { title: cleanTitle });
+      }
+      return c;
+    });
+    setSavedCases(list);
+    return list;
+  }
+
+  function loadCaseForAction(caseId, actionType) {
+    const item = getSavedCaseById(caseId);
+    if (!item) return;
+
+    if (item.estate) {
+      setEstateData(item.estate);
+    }
+
+    if (actionType === 'view' || item.status === 'completed') {
+      const res = calculateFaraid(item.estate || defaultEstate, item.heirs || defaultHeirs);
+      setResultData(res);
+      window.location.href = 'keputusan.html';
+    } else {
+      window.location.href = 'langkah1.html';
+    }
+  }
+
+  function shareSavedCase(caseId) {
+    const item = getSavedCaseById(caseId);
+    if (!item) return;
+    const netFormatted = formatRM(item.estate ? item.estate.net : (item.net || 0));
+    const title = `Simulasi Faraid: ${item.title}`;
+    const text = `Ringkasan Simulasi Faraid Malaysia (Mazhab Shafi'i)\n` +
+      `Kes: ${item.title}\n` +
+      `Status: ${item.status === 'completed' ? 'Selesai' : 'Draf'}\n` +
+      `Baki Harta Bersih: RM ${netFormatted}\n` +
+      `Jumlah Waris: ${item.totalHeirCount || item.heirCount || 0} Orang\n` +
+      `Perincian: ${item.summary || 'Formula Ashabul Furud & Asabah'}\n\n` +
+      `Rujukan awal mengikut hukum Syarak dan perundangan syariah di Malaysia.`;
+    share(title, text);
+  }
+
+  function renderSavedCasesListHtml() {
+    const cases = getSavedCases();
+    if (!cases || cases.length === 0) {
+      return `
+        <div class="p-6 text-center text-on-surface-variant space-y-2">
+          <span class="material-symbols-outlined text-[36px] text-outline">bookmark_border</span>
+          <p class="font-label-md text-label-md font-medium">Tiada kes tersimpan ditemui.</p>
+        </div>
+      `;
+    }
+
+    return cases.map(c => {
+      const isCompleted = c.status === 'completed';
+      const badgeClass = isCompleted ? 'bg-primary-fixed text-primary' : 'bg-secondary-fixed text-secondary';
+      const badgeText = isCompleted ? 'Selesai Ditapis' : 'Draf';
+      const netVal = c.estate ? c.estate.net : (c.net || 0);
+      const netStr = formatRM(netVal);
+      const heirCount = c.totalHeirCount || c.heirCount || 0;
+      return `
+        <div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm border border-surface-variant">
+          <div class="flex items-center justify-between">
+            <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full ${badgeClass} font-bold">${badgeText}</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">${c.date || ''}</span>
+          </div>
+          <h4 class="font-label-lg text-label-lg font-bold text-on-surface mt-1">${c.title}</h4>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Baki Harta: <strong>RM ${netStr}</strong> • ${heirCount} Waris</p>
+          <button onclick="FaraidApp.loadCaseForAction('${c.id}', '${isCompleted ? 'view' : 'continue'}')" class="mt-2.5 w-full py-2 ${isCompleted ? 'bg-primary text-on-primary' : 'bg-surface-container hover:bg-surface-container-high text-on-surface'} rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1 transition-colors">
+            <span>${isCompleted ? 'Buka Ringkasan Kes' : 'Sambung Kira'}</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
+        </div>
+      `;
+    }).join('');
+  }
+
   function showSavedModal() {
     let modal = document.getElementById('saved-cases-modal');
     if (!modal) {
@@ -360,31 +518,8 @@ window.FaraidApp = (function () {
               <span class="material-symbols-outlined text-[20px]">close</span>
             </button>
           </div>
-          <div class="py-4 space-y-3 overflow-y-auto flex-1">
-            <div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm border border-surface-variant">
-              <div class="flex items-center justify-between">
-                <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-bold">Selesai Ditapis</span>
-                <span class="font-body-sm text-body-sm text-on-surface-variant">24 Okt 2024</span>
-              </div>
-              <h4 class="font-label-lg text-label-lg font-bold text-on-surface mt-1">Keluarga Arwah Hj. Ismail</h4>
-              <p class="font-body-sm text-body-sm text-on-surface-variant">Baki Harta: <strong>RM 500,000.00</strong> • 5 Waris</p>
-              <button onclick="FaraidApp.loadSampleCase(500000)" class="mt-2.5 w-full py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1">
-                <span>Buka Ringkasan Kes</span>
-                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-              </button>
-            </div>
-            <div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm border border-surface-variant">
-              <div class="flex items-center justify-between">
-                <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-secondary font-bold">Draf</span>
-                <span class="font-body-sm text-body-sm text-on-surface-variant">18 Okt 2024</span>
-              </div>
-              <h4 class="font-label-lg text-label-lg font-bold text-on-surface mt-1">Simulasi Puan Aminah</h4>
-              <p class="font-body-sm text-body-sm text-on-surface-variant">Baki Harta: <strong>RM 320,000.00</strong> • 4 Waris</p>
-              <button onclick="FaraidApp.loadSampleCase(320000)" class="mt-2.5 w-full py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1">
-                <span>Buka Ringkasan Kes</span>
-                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-              </button>
-            </div>
+          <div id="saved-modal-content-list" class="py-4 space-y-3 overflow-y-auto flex-1">
+            ${renderSavedCasesListHtml()}
           </div>
         </div>
       `;
@@ -396,6 +531,10 @@ window.FaraidApp = (function () {
         if (e.target === modal) modal.classList.add('hidden');
       });
     } else {
+      const listContainer = document.getElementById('saved-modal-content-list');
+      if (listContainer) {
+        listContainer.innerHTML = renderSavedCasesListHtml();
+      }
       modal.classList.remove('hidden');
     }
   }
@@ -423,6 +562,15 @@ window.FaraidApp = (function () {
     }
   }
 
+  function vibrate(ms) {
+    const duration = typeof ms === 'number' ? ms : 30;
+    if (window.AndroidBridge && window.AndroidBridge.vibrate) {
+      window.AndroidBridge.vibrate(duration);
+    } else if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(duration);
+    }
+  }
+
   function share(title, text) {
     if (window.AndroidBridge && window.AndroidBridge.shareText) {
       window.AndroidBridge.shareText(title, text);
@@ -444,10 +592,19 @@ window.FaraidApp = (function () {
     initNav,
     showSavedModal,
     loadSampleCase,
+    getSavedCases,
+    setSavedCases,
+    getSavedCaseById,
+    deleteSavedCase,
+    renameSavedCase,
+    loadCaseForAction,
+    shareSavedCase,
+    vibrate,
     notify,
     share,
     defaultEstate,
-    defaultHeirs
+    defaultHeirs,
+    defaultSavedCases
   };
 })();
 

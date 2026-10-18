@@ -125,22 +125,24 @@
         <span class="material-symbols-outlined text-[16px] ml-0.5">chevron_right</span>
 </a>
 </div>
+<!-- Recent Cards Container -->
+<div id="recent-cards" class="flex flex-col space-y-space-xs">
 <!-- Case Card 1 (Completed) -->
-<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm space-y-3">
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm space-y-3 transition-all duration-300" data-case-id="case-hj-ismail" data-status="completed" data-case-title="Keluarga Arwah Hj. Ismail">
 <div class="flex items-start justify-between">
 <div class="space-y-0.5">
 <div class="flex items-center gap-2">
 <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-bold flex items-center gap-1">
 <span class="material-symbols-outlined text-[12px]">check_circle</span> Selesai
             </span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">24 Okt 2024</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant case-date">24 Okt 2024</span>
 </div>
-<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface pt-1">
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface pt-1 case-title">
             Keluarga Arwah Hj. Ismail
           </h4>
 </div>
-<button aria-label="Menu pilihan" class="text-on-surface-variant p-1 rounded-full hover:bg-surface-container">
-<span class="material-symbols-outlined text-[20px]">more_vert</span>
+<button aria-label="Menu pilihan untuk Keluarga Arwah Hj. Ismail" data-action="more" data-case-id="case-hj-ismail" data-status="completed" class="text-on-surface-variant p-2 -mr-1 rounded-full hover:bg-surface-container active:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px] pointer-events-none">more_vert</span>
 </button>
 </div>
 <!-- Estate Value & Distribution Metric -->
@@ -174,21 +176,21 @@
 </div>
 </div>
 <!-- Case Card 2 (Draft) -->
-<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm space-y-3">
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm space-y-3 transition-all duration-300" data-case-id="case-puan-aminah" data-status="draft" data-case-title="Simulasi Ringkas Puan Aminah">
 <div class="flex items-start justify-between">
 <div class="space-y-0.5">
 <div class="flex items-center gap-2">
 <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm font-bold flex items-center gap-1">
 <span class="material-symbols-outlined text-[12px]">edit_note</span> Draf
             </span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">12 Okt 2024</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant case-date">12 Okt 2024</span>
 </div>
-<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface pt-1">
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface pt-1 case-title">
             Simulasi Ringkas Puan Aminah
           </h4>
 </div>
-<button aria-label="Menu pilihan" class="text-on-surface-variant p-1 rounded-full hover:bg-surface-container">
-<span class="material-symbols-outlined text-[20px]">more_vert</span>
+<button aria-label="Menu pilihan untuk Simulasi Ringkas Puan Aminah" data-action="more" data-case-id="case-puan-aminah" data-status="draft" class="text-on-surface-variant p-2 -mr-1 rounded-full hover:bg-surface-container active:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px] pointer-events-none">more_vert</span>
 </button>
 </div>
 <div class="bg-surface-container-low rounded-xl p-3 flex items-center justify-between">
@@ -212,6 +214,19 @@
           Sambung Kira
           <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
 </a>
+</div>
+</div>
+<!-- Empty State when all recent cards are deleted -->
+<div id="no-recent-cards" class="hidden flex-col items-center justify-center p-8 bg-surface-container-lowest rounded-2xl border border-dashed border-outline-variant text-center space-y-2">
+  <span class="material-symbols-outlined text-outline text-[40px]">history_edu</span>
+  <h4 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Tiada Simulasi Terkini</h4>
+  <p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">
+    Mulakan pengiraan Faraid baharu untuk melihat rekod simulasi anda di sini.
+  </p>
+  <a href="langkah1.html" class="mt-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm">
+    <span class="material-symbols-outlined text-[18px]">calculate</span>
+    Mula Kira
+  </a>
 </div>
 </div>
 </div>
@@ -246,6 +261,92 @@
 </div>
 </div>
 </div>
+
+<!-- Reusable Action Sheet / Bottom Sheet for Recent Cases -->
+<div id="case-action-sheet" class="fixed inset-0 z-50 transition-all duration-300 pointer-events-none opacity-0 invisible" aria-hidden="true" role="dialog" aria-modal="true">
+  <!-- Backdrop -->
+  <div id="action-sheet-backdrop" class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm transition-opacity duration-300"></div>
+  
+  <!-- Sheet Panel -->
+  <div id="action-sheet-panel" class="absolute inset-x-0 bottom-0 max-w-md mx-auto w-full transition-transform duration-300 transform translate-y-full flex flex-col justify-end pointer-events-auto">
+    <div class="bg-surface-container-lowest rounded-t-3xl shadow-2xl p-space-md border-t border-surface-variant flex flex-col space-y-3 pb-[calc(env(safe-area-inset-bottom,0px)+1.5rem)]">
+      
+      <!-- Drag handle indicator -->
+      <div class="w-10 h-1 bg-outline-variant/60 rounded-full mx-auto mb-1"></div>
+      
+      <!-- Sheet Header -->
+      <div class="flex items-center justify-between pb-2 border-b border-surface-variant">
+        <div class="flex flex-col min-w-0 pr-2">
+          <div class="flex items-center gap-1.5 mb-0.5">
+            <span id="sheet-case-status-badge" class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-bold flex items-center gap-1"></span>
+            <span id="sheet-case-date" class="font-label-sm text-label-sm text-on-surface-variant"></span>
+          </div>
+          <h3 id="sheet-case-title" class="font-headline-sm text-headline-sm font-bold text-on-surface truncate">Nama Simulasi</h3>
+        </div>
+        <button id="close-action-sheet-btn" aria-label="Tutup menu" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-container text-on-surface-variant transition-colors flex-shrink-0">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Action Items List (rendered dynamically) -->
+      <div id="sheet-action-list" class="flex flex-col space-y-1.5 pt-1"></div>
+
+      <!-- Tutup Button -->
+      <button id="cancel-action-sheet-btn" type="button" class="w-full mt-1 py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold text-center transition-colors">
+        Tutup
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- Dialog Modal for Rename Simulation -->
+<div id="rename-dialog-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-200 pointer-events-none opacity-0 invisible" role="dialog" aria-modal="true" aria-labelledby="rename-dialog-title">
+  <div id="rename-dialog-backdrop" class="absolute inset-0 bg-on-surface/50 backdrop-blur-sm transition-opacity duration-200"></div>
+  <div id="rename-dialog-panel" class="relative z-10 bg-surface-container-lowest rounded-2xl p-space-md shadow-2xl max-w-sm w-full border border-surface-variant transition-all duration-200 transform scale-95 flex flex-col space-y-3 pointer-events-auto">
+    <div class="flex items-center gap-2 text-primary pb-1">
+      <span class="material-symbols-outlined text-[22px]">edit</span>
+      <h3 id="rename-dialog-title" class="font-headline-sm text-headline-sm font-bold text-on-surface">Tukar Nama Simulasi</h3>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">
+      Masukkan nama baru untuk rujukan rekod pengiraan Faraid ini.
+    </p>
+    <div class="relative rounded-lg bg-surface-container-low px-3 py-2 border border-surface-variant focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+      <input id="rename-input-field" type="text" maxlength="60" class="w-full bg-transparent font-label-lg text-label-lg text-on-surface focus:outline-none" placeholder="cth: Keluarga Hj. Ahmad" />
+    </div>
+    <div class="flex items-center justify-end gap-2 pt-2">
+      <button id="cancel-rename-btn" type="button" class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors">
+        Batal
+      </button>
+      <button id="confirm-rename-btn" type="button" class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold transition-colors shadow-sm">
+        Simpan
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Dialog Modal for Delete Confirmation -->
+<div id="delete-confirm-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-200 pointer-events-none opacity-0 invisible" role="dialog" aria-modal="true" aria-labelledby="delete-dialog-title">
+  <div id="delete-dialog-backdrop" class="absolute inset-0 bg-on-surface/50 backdrop-blur-sm transition-opacity duration-200"></div>
+  <div id="delete-dialog-panel" class="relative z-10 bg-surface-container-lowest rounded-2xl p-space-md shadow-2xl max-w-sm w-full border border-surface-variant transition-all duration-200 transform scale-95 flex flex-col space-y-3 pointer-events-auto">
+    <div class="flex items-center gap-2 text-error pb-1">
+      <span class="material-symbols-outlined text-[24px]">delete_forever</span>
+      <h3 id="delete-dialog-title" class="font-headline-sm text-headline-sm font-bold text-on-surface">Padam Simulasi?</h3>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">
+      Adakah anda pasti mahu memadam <strong id="delete-case-name" class="text-on-surface"></strong>? Tindakan ini tidak boleh diundur.
+    </p>
+    <div class="flex items-center justify-end gap-2 pt-2">
+      <button id="cancel-delete-btn" type="button" class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors">
+        Batal
+      </button>
+      <button id="confirm-delete-btn" type="button" class="px-4 py-2 rounded-lg bg-error hover:bg-error/90 text-on-error font-label-md text-label-md font-semibold transition-colors shadow-sm">
+        Padam
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
   // Simple micro-interaction for shortcut touch ripple feedback
   document.querySelectorAll('a, button').forEach(el => {
@@ -256,4 +357,377 @@
       el.classList.remove('opacity-80');
     });
   });
+
+  // Action Sheet & Context Menu for Simulasi Terkini Cards
+  (function initRecentCasesActionSheet() {
+    const sheet = document.getElementById('case-action-sheet');
+    const sheetBackdrop = document.getElementById('action-sheet-backdrop');
+    const sheetPanel = document.getElementById('action-sheet-panel');
+    const closeSheetBtn = document.getElementById('close-action-sheet-btn');
+    const cancelSheetBtn = document.getElementById('cancel-action-sheet-btn');
+    const sheetTitle = document.getElementById('sheet-case-title');
+    const sheetStatusBadge = document.getElementById('sheet-case-status-badge');
+    const sheetDate = document.getElementById('sheet-case-date');
+    const sheetActionList = document.getElementById('sheet-action-list');
+
+    // Rename modal elements
+    const renameModal = document.getElementById('rename-dialog-modal');
+    const renameBackdrop = document.getElementById('rename-dialog-backdrop');
+    const renamePanel = document.getElementById('rename-dialog-panel');
+    const renameInput = document.getElementById('rename-input-field');
+    const cancelRenameBtn = document.getElementById('cancel-rename-btn');
+    const confirmRenameBtn = document.getElementById('confirm-rename-btn');
+
+    // Delete modal elements
+    const deleteModal = document.getElementById('delete-confirm-modal');
+    const deleteBackdrop = document.getElementById('delete-dialog-backdrop');
+    const deletePanel = document.getElementById('delete-dialog-panel');
+    const deleteCaseName = document.getElementById('delete-case-name');
+    const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+    const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+
+    const recentCardsContainer = document.getElementById('recent-cards');
+    const noRecentCardsState = document.getElementById('no-recent-cards');
+
+    let activeCaseId = null;
+    let activeStatus = null;
+    let activeCardEl = null;
+
+    // Sync DOM with saved cases in localStorage
+    function syncCardsWithStorage() {
+      if (!window.FaraidApp || !recentCardsContainer) return;
+      const cases = window.FaraidApp.getSavedCases();
+      const caseIds = new Set(cases.map(c => c.id));
+      
+      const cards = recentCardsContainer.querySelectorAll('[data-case-id]');
+      cards.forEach(card => {
+        const id = card.dataset.caseId;
+        if (!caseIds.has(id)) {
+          card.remove();
+        } else {
+          const matching = cases.find(c => c.id === id);
+          if (matching) {
+            card.dataset.caseTitle = matching.title;
+            const titleEl = card.querySelector('.case-title');
+            if (titleEl) titleEl.textContent = matching.title;
+          }
+        }
+      });
+
+      updateEmptyState();
+    }
+
+    function updateEmptyState() {
+      if (!recentCardsContainer || !noRecentCardsState) return;
+      const visibleCards = recentCardsContainer.querySelectorAll('[data-case-id]');
+      if (visibleCards.length === 0) {
+        noRecentCardsState.classList.remove('hidden');
+        noRecentCardsState.classList.add('flex');
+      } else {
+        noRecentCardsState.classList.add('hidden');
+        noRecentCardsState.classList.remove('flex');
+      }
+    }
+
+    function openSheet(caseId, status, cardEl) {
+      activeCaseId = caseId;
+      activeStatus = status;
+      activeCardEl = cardEl;
+
+      // Haptic feedback
+      if (window.FaraidApp && window.FaraidApp.vibrate) {
+        window.FaraidApp.vibrate(30);
+      }
+
+      const title = cardEl ? (cardEl.dataset.caseTitle || cardEl.querySelector('.case-title')?.textContent.trim()) : 'Simulasi Faraid';
+      const dateEl = cardEl ? cardEl.querySelector('.case-date') : null;
+      const dateText = dateEl ? dateEl.textContent.trim() : '';
+
+      sheetTitle.textContent = title;
+      sheetDate.textContent = dateText;
+
+      if (status === 'completed') {
+        sheetStatusBadge.className = 'px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-bold flex items-center gap-1';
+        sheetStatusBadge.innerHTML = '<span class="material-symbols-outlined text-[12px]">check_circle</span> Selesai';
+        
+        sheetActionList.innerHTML = `
+          <button data-sheet-action="view" class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container active:bg-surface-container-high text-left w-full transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-primary-fixed/50 text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">visibility</span>
+              </div>
+              <div>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface block">Lihat Keputusan</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Semak pecahan hak waris &amp; bahagian</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+          </button>
+          <button data-sheet-action="share" class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container active:bg-surface-container-high text-left w-full transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 text-secondary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">share</span>
+              </div>
+              <div>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface block">Kongsi Ringkasan</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Hantar teks ringkasan agihan Syarak</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-secondary transition-colors">chevron_right</span>
+          </button>
+          <button data-sheet-action="rename" class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container active:bg-surface-container-high text-left w-full transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">edit</span>
+              </div>
+              <div>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface block">Tukar Nama</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Kemaskini tajuk rekod simulasi</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant">chevron_right</span>
+          </button>
+          <button data-sheet-action="delete" class="flex items-center justify-between p-3 rounded-xl hover:bg-error-container/40 active:bg-error-container text-left w-full transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-error-container text-error flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">delete</span>
+              </div>
+              <div>
+                <span class="font-label-lg text-label-lg font-semibold text-error block">Padam</span>
+                <span class="font-body-sm text-body-sm text-error/80 block">Buang rekod simulasi ini</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-error/60 group-hover:text-error transition-colors">chevron_right</span>
+          </button>
+        `;
+      } else {
+        sheetStatusBadge.className = 'px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm font-bold flex items-center gap-1';
+        sheetStatusBadge.innerHTML = '<span class="material-symbols-outlined text-[12px]">edit_note</span> Draf';
+
+        sheetActionList.innerHTML = `
+          <button data-sheet-action="continue" class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container active:bg-surface-container-high text-left w-full transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-primary-fixed/50 text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+              </div>
+              <div>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface block">Sambung Kira</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Teruskan pengiraan dari Langkah 1</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+          </button>
+          <button data-sheet-action="rename" class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container active:bg-surface-container-high text-left w-full transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">edit</span>
+              </div>
+              <div>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface block">Tukar Nama</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant block">Kemaskini tajuk rekod simulasi</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant">chevron_right</span>
+          </button>
+          <button data-sheet-action="delete" class="flex items-center justify-between p-3 rounded-xl hover:bg-error-container/40 active:bg-error-container text-left w-full transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-error-container text-error flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">delete</span>
+              </div>
+              <div>
+                <span class="font-label-lg text-label-lg font-semibold text-error block">Padam</span>
+                <span class="font-body-sm text-body-sm text-error/80 block">Buang rekod simulasi ini</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-error/60 group-hover:text-error transition-colors">chevron_right</span>
+          </button>
+        `;
+      }
+
+      sheet.classList.remove('invisible', 'pointer-events-none');
+      sheet.classList.add('visible', 'pointer-events-auto');
+      requestAnimationFrame(() => {
+        sheet.classList.remove('opacity-0');
+        sheet.classList.add('opacity-100');
+        sheetPanel.classList.remove('translate-y-full');
+        sheetPanel.classList.add('translate-y-0');
+      });
+    }
+
+    function closeSheet() {
+      sheet.classList.remove('opacity-100');
+      sheet.classList.add('opacity-0');
+      sheetPanel.classList.remove('translate-y-0');
+      sheetPanel.classList.add('translate-y-full');
+      setTimeout(() => {
+        sheet.classList.remove('visible', 'pointer-events-auto');
+        sheet.classList.add('invisible', 'pointer-events-none');
+      }, 280);
+    }
+
+    function openRenameDialog() {
+      const currentTitle = activeCardEl ? (activeCardEl.dataset.caseTitle || '') : '';
+      renameInput.value = currentTitle;
+      renameModal.classList.remove('invisible', 'pointer-events-none');
+      renameModal.classList.add('visible', 'pointer-events-auto');
+      requestAnimationFrame(() => {
+        renameModal.classList.remove('opacity-0');
+        renameModal.classList.add('opacity-100');
+        renamePanel.classList.remove('scale-95');
+        renamePanel.classList.add('scale-100');
+        renameInput.focus();
+        renameInput.select();
+      });
+    }
+
+    function closeRenameDialog() {
+      renameModal.classList.remove('opacity-100');
+      renameModal.classList.add('opacity-0');
+      renamePanel.classList.remove('scale-100');
+      renamePanel.classList.add('scale-95');
+      setTimeout(() => {
+        renameModal.classList.remove('visible', 'pointer-events-auto');
+        renameModal.classList.add('invisible', 'pointer-events-none');
+      }, 200);
+    }
+
+    function openDeleteDialog() {
+      const currentTitle = activeCardEl ? (activeCardEl.dataset.caseTitle || 'simulasi ini') : 'simulasi ini';
+      deleteCaseName.textContent = currentTitle;
+      deleteModal.classList.remove('invisible', 'pointer-events-none');
+      deleteModal.classList.add('visible', 'pointer-events-auto');
+      requestAnimationFrame(() => {
+        deleteModal.classList.remove('opacity-0');
+        deleteModal.classList.add('opacity-100');
+        deletePanel.classList.remove('scale-95');
+        deletePanel.classList.add('scale-100');
+      });
+    }
+
+    function closeDeleteDialog() {
+      deleteModal.classList.remove('opacity-100');
+      deleteModal.classList.add('opacity-0');
+      deletePanel.classList.remove('scale-100');
+      deletePanel.classList.add('scale-95');
+      setTimeout(() => {
+        deleteModal.classList.remove('visible', 'pointer-events-auto');
+        deleteModal.classList.add('invisible', 'pointer-events-none');
+      }, 200);
+    }
+
+    // Event delegation on #recent-cards container
+    recentCardsContainer?.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action="more"]');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      const card = btn.closest('[data-case-id]');
+      const caseId = btn.dataset.caseId || card?.dataset.caseId;
+      const status = btn.dataset.status || card?.dataset.status || 'completed';
+      openSheet(caseId, status, card);
+    });
+
+    // Action Sheet menu click handler
+    sheetActionList?.addEventListener('click', (e) => {
+      const actionBtn = e.target.closest('[data-sheet-action]');
+      if (!actionBtn) return;
+      const action = actionBtn.dataset.sheetAction;
+
+      if (window.FaraidApp && window.FaraidApp.vibrate) {
+        window.FaraidApp.vibrate(20);
+      }
+
+      closeSheet();
+
+      if (action === 'view') {
+        if (window.FaraidApp) {
+          window.FaraidApp.loadCaseForAction(activeCaseId, 'view');
+        } else {
+          window.location.href = 'keputusan.html';
+        }
+      } else if (action === 'continue') {
+        if (window.FaraidApp) {
+          window.FaraidApp.loadCaseForAction(activeCaseId, 'continue');
+        } else {
+          window.location.href = 'langkah1.html';
+        }
+      } else if (action === 'share') {
+        if (window.FaraidApp) {
+          window.FaraidApp.shareSavedCase(activeCaseId);
+        }
+      } else if (action === 'rename') {
+        setTimeout(() => openRenameDialog(), 150);
+      } else if (action === 'delete') {
+        setTimeout(() => openDeleteDialog(), 150);
+      }
+    });
+
+    // Rename confirmation
+    confirmRenameBtn?.addEventListener('click', () => {
+      const newName = (renameInput.value || '').trim();
+      if (!newName) {
+        renameInput.focus();
+        return;
+      }
+      if (activeCardEl) {
+        activeCardEl.dataset.caseTitle = newName;
+        const titleEl = activeCardEl.querySelector('.case-title');
+        if (titleEl) titleEl.textContent = newName;
+      }
+      if (window.FaraidApp) {
+        window.FaraidApp.renameSavedCase(activeCaseId, newName);
+        window.FaraidApp.notify('Nama simulasi berjaya dikemas kini.');
+      }
+      closeRenameDialog();
+    });
+
+    renameInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        confirmRenameBtn?.click();
+      } else if (e.key === 'Escape') {
+        closeRenameDialog();
+      }
+    });
+
+    cancelRenameBtn?.addEventListener('click', closeRenameDialog);
+    renameBackdrop?.addEventListener('click', closeRenameDialog);
+
+    // Delete confirmation
+    confirmDeleteBtn?.addEventListener('click', () => {
+      if (activeCardEl) {
+        activeCardEl.style.transition = 'all 0.3s ease-out';
+        activeCardEl.style.opacity = '0';
+        activeCardEl.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          activeCardEl.remove();
+          updateEmptyState();
+        }, 300);
+      }
+      if (window.FaraidApp) {
+        window.FaraidApp.deleteSavedCase(activeCaseId);
+        window.FaraidApp.notify('Simulasi telah dipadam.');
+      }
+      closeDeleteDialog();
+    });
+
+    cancelDeleteBtn?.addEventListener('click', closeDeleteDialog);
+    deleteBackdrop?.addEventListener('click', closeDeleteDialog);
+
+    // Sheet closing listeners
+    closeSheetBtn?.addEventListener('click', closeSheet);
+    cancelSheetBtn?.addEventListener('click', closeSheet);
+    sheetBackdrop?.addEventListener('click', closeSheet);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSheet();
+        closeRenameDialog();
+        closeDeleteDialog();
+      }
+    });
+
+    // Sync initial state from localStorage
+    syncCardsWithStorage();
+  })();
 </script><script src="faraid_app.js"></script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(26,32,44,0.06)]" data-active-classes="[&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold"><div class="flex justify-around items-center h-20 px-space-xs max-w-md mx-auto"><a aria-current="page" class="group flex flex-col items-center justify-center gap-1 w-20 py-1 transition-all select-none [&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold" data-path="utama" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">home</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Utama<span class="block text-[9px] font-normal opacity-80 leading-none">Home</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="simulasi" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">calculate</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Simulasi<span class="block text-[9px] font-normal opacity-80 leading-none">Simulate</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="panduan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">menu_book</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Panduan<span class="block text-[9px] font-normal opacity-80 leading-none">Learn</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="tersimpan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">bookmark</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Tersimpan<span class="block text-[9px] font-normal opacity-80 leading-none">Saved</span></span></a></div></nav></body></html>
