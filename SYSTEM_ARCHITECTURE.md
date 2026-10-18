@@ -180,14 +180,20 @@ Session data is stored in the browser `localStorage` engine within the WebView s
   ```json
   [
     {
-      "id": "case-hj-ismail",
-      "title": "Keluarga Arwah Hj. Ismail",
+      "id": "uuid-or-timestamp-string",
+      "title": "Simulasi 18/10/2026",
       "status": "completed",
-      "date": "24 Okt 2024",
+      "date": "18 Okt 2026",
+      "createdAt": "2026-10-18T02:20:00.000Z",
+      "updatedAt": "2026-10-18T02:20:00.000Z",
+      "netEstate": 500000.0,
+      "heirCount": 4,
+      "totalHeirCount": 4,
+      "estateData": { "gross": 550000.0, "funeral": 5000.0, "debt": 30000.0, "wasiat": 15000.0, "net": 500000.0 },
+      "resultData": { "netEstate": 500000.0, "asalMasalah": 24, "shares": [], "totalHeirCount": 4 },
       "estate": { "gross": 550000.0, "funeral": 5000.0, "debt": 30000.0, "wasiat": 15000.0, "net": 500000.0 },
       "heirs": { "deceasedGender": "male", "wifeCount": 1, "husbandCount": 0, "sons": 2, "daughters": 1, "fatherAlive": true, "motherAlive": true },
-      "summary": "Isteri (1) • 1/8 (RM 62.5k) | 2 Anak Lelaki, 1 Perempuan • Asabah (2:1)",
-      "totalHeirCount": 4
+      "summary": "Isteri (1) • 1/8 (RM 62.5k) | 2 Anak Lelaki, 1 Perempuan • Asabah (2:1)"
     }
   ]
   ```

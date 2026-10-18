@@ -4,9 +4,10 @@
  */
 
 window.FaraidApp = (function () {
+  const SAVED_CASES_KEY = 'faraid_saved_cases';
   const STORAGE_ESTATE_KEY = 'faraid_estate_data';
   const STORAGE_RESULT_KEY = 'faraid_result_data';
-  const STORAGE_SAVED_CASES = 'faraid_saved_cases';
+  const STORAGE_SAVED_CASES = SAVED_CASES_KEY;
   const STORAGE_USER_PREFS = 'faraid_user_prefs';
 
   const defaultUserPrefs = {
@@ -396,6 +397,8 @@ window.FaraidApp = (function () {
         });
       }
     });
+
+    updateSavedBadges();
   }
 
   const defaultSavedCases = [
@@ -404,7 +407,19 @@ window.FaraidApp = (function () {
       title: 'Keluarga Arwah Hj. Ismail',
       status: 'completed',
       date: '24 Okt 2024',
+      createdAt: new Date('2024-10-24T00:00:00.000Z').toISOString(),
+      updatedAt: new Date('2024-10-24T00:00:00.000Z').toISOString(),
+      netEstate: 500000,
+      heirCount: 4,
+      totalHeirCount: 4,
       estate: {
+        gross: 550000,
+        funeral: 5000,
+        debt: 30000,
+        wasiat: 15000,
+        net: 500000
+      },
+      estateData: {
         gross: 550000,
         funeral: 5000,
         debt: 30000,
@@ -420,15 +435,31 @@ window.FaraidApp = (function () {
         fatherAlive: true,
         motherAlive: true
       },
-      summary: 'Isteri (1) • 1/8 (RM 62.5k) | 2 Anak Lelaki, 1 Perempuan • Asabah (2:1)',
-      totalHeirCount: 4
+      resultData: {
+        netEstate: 500000,
+        asalMasalah: 24,
+        totalHeirCount: 4
+      },
+      summary: 'Isteri (1) • 1/8 (RM 62.5k) | 2 Anak Lelaki, 1 Perempuan • Asabah (2:1)'
     },
     {
       id: 'case-puan-aminah',
       title: 'Simulasi Ringkas Puan Aminah',
       status: 'draft',
       date: '12 Okt 2024',
+      createdAt: new Date('2024-10-12T00:00:00.000Z').toISOString(),
+      updatedAt: new Date('2024-10-12T00:00:00.000Z').toISOString(),
+      netEstate: 250000,
+      heirCount: 3,
+      totalHeirCount: 3,
       estate: {
+        gross: 300000,
+        funeral: 5000,
+        debt: 35000,
+        wasiat: 10000,
+        net: 250000
+      },
+      estateData: {
         gross: 300000,
         funeral: 5000,
         debt: 35000,
@@ -444,25 +475,172 @@ window.FaraidApp = (function () {
         fatherAlive: false,
         motherAlive: true
       },
-      summary: 'Suami, Ibu & 1 Anak Perempuan',
-      totalHeirCount: 3
+      resultData: {
+        netEstate: 250000,
+        asalMasalah: 24,
+        totalHeirCount: 3
+      },
+      summary: 'Suami, Ibu & 1 Anak Perempuan'
     }
   ];
 
+  function seedDefaultCasesIfEmpty() {
+    try {
+      const stored = localStorage.getItem(SAVED_CASES_KEY);
+      if (stored === null) {
+        localStorage.setItem(SAVED_CASES_KEY, JSON.stringify(defaultSavedCases));
+        return defaultSavedCases;
+      }
+    } catch (e) {
+      console.error('Failed to seed default cases:', e);
+    }
+    return null;
+  }
+
   function getSavedCases() {
     try {
-      const stored = localStorage.getItem(STORAGE_SAVED_CASES);
-      if (stored) {
-        return JSON.parse(stored);
+      const stored = localStorage.getItem(SAVED_CASES_KEY);
+      if (stored !== null) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+        return [];
       }
-    } catch (e) {}
-    return defaultSavedCases;
+      // Fresh install: seed once
+      seedDefaultCasesIfEmpty();
+      return defaultSavedCases.slice();
+    } catch (e) {
+      console.error('Error reading saved cases from storage:', e);
+      return [];
+    }
   }
 
   function setSavedCases(cases) {
     try {
-      localStorage.setItem(STORAGE_SAVED_CASES, JSON.stringify(cases));
+      localStorage.setItem(SAVED_CASES_KEY, JSON.stringify(cases || []));
+      updateSavedBadges((cases || []).length);
+      refreshHomeSavedUI();
+    } catch (e) {
+      console.error('Error writing saved cases to storage:', e);
+      throw e;
+    }
+  }
+
+  function saveCase(caseObj) {
+    if (!caseObj || !caseObj.id) {
+      console.error('Invalid case object passed to saveCase');
+      return getSavedCases();
+    }
+    const cases = getSavedCases();
+    const existingIndex = cases.findIndex(c => c.id === caseObj.id);
+    if (existingIndex >= 0) {
+      cases[existingIndex] = Object.assign({}, cases[existingIndex], caseObj, {
+        updatedAt: new Date().toISOString()
+      });
+    } else {
+      cases.unshift(caseObj);
+    }
+    try {
+      localStorage.setItem(SAVED_CASES_KEY, JSON.stringify(cases));
+      updateSavedBadges(cases.length);
+      refreshHomeSavedUI();
+      return cases;
+    } catch (e) {
+      console.error('Failed to save case to localStorage:', e);
+      throw e;
+    }
+  }
+
+  function deleteCase(id) {
+    try {
+      const current = getSavedCases();
+      const updated = current.filter(c => c.id !== id);
+      localStorage.setItem(SAVED_CASES_KEY, JSON.stringify(updated));
+      updateSavedBadges(updated.length);
+      refreshHomeSavedUI();
+      // Re-render modal list if modal is present
+      const listContainer = document.getElementById('saved-modal-content-list');
+      if (listContainer) {
+        listContainer.innerHTML = renderSavedCasesListHtml();
+      }
+      return updated;
+    } catch (e) {
+      console.error('Failed to delete case:', e);
+      return getSavedCases();
+    }
+  }
+
+  const deleteSavedCase = deleteCase;
+
+  function createCaseFromCurrentState(title) {
+    let estateData = null;
+    try {
+      const rawEstate = localStorage.getItem(STORAGE_ESTATE_KEY);
+      if (rawEstate) estateData = JSON.parse(rawEstate);
     } catch (e) {}
+    if (!estateData) estateData = Object.assign({}, defaultEstate);
+
+    let resultData = null;
+    try {
+      const rawResult = localStorage.getItem(STORAGE_RESULT_KEY);
+      if (rawResult) resultData = JSON.parse(rawResult);
+    } catch (e) {}
+    if (!resultData) {
+      resultData = calculateFaraid(estateData, defaultHeirs);
+    }
+
+    const netEstate = typeof estateData.net === 'number'
+      ? estateData.net
+      : (resultData.netEstate || 0);
+
+    let heirCount = 0;
+    if (resultData && typeof resultData.totalHeirCount === 'number') {
+      heirCount = resultData.totalHeirCount;
+    } else if (resultData && Array.isArray(resultData.shares)) {
+      heirCount = resultData.shares.reduce((acc, s) => acc + (s.count || 1), 0);
+    }
+
+    let caseId = '';
+    try {
+      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        caseId = crypto.randomUUID();
+      }
+    } catch (e) {}
+    if (!caseId) {
+      caseId = Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 7);
+    }
+
+    const nowIso = new Date().toISOString();
+    let dateFormatted = '';
+    try {
+      dateFormatted = new Date().toLocaleDateString('ms-MY', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+    } catch (e) {
+      dateFormatted = new Date().toLocaleDateString('ms-MY');
+    }
+
+    const defaultTitle = `Simulasi ${new Date().toLocaleDateString('ms-MY')}`;
+    const cleanTitle = (title || '').trim() || defaultTitle;
+
+    return {
+      id: caseId,
+      title: cleanTitle,
+      status: 'completed',
+      date: dateFormatted,
+      createdAt: nowIso,
+      updatedAt: nowIso,
+      netEstate: Number(netEstate),
+      heirCount: Number(heirCount),
+      totalHeirCount: Number(heirCount),
+      estateData: estateData,
+      estate: estateData,
+      resultData: resultData,
+      heirs: resultData.heirsSummary || defaultHeirs
+    };
   }
 
   function getSavedCaseById(caseId) {
@@ -470,18 +648,15 @@ window.FaraidApp = (function () {
     return list.find(c => c.id === caseId) || defaultSavedCases.find(c => c.id === caseId) || null;
   }
 
-  function deleteSavedCase(caseId) {
-    const list = getSavedCases().filter(c => c.id !== caseId);
-    setSavedCases(list);
-    return list;
-  }
-
   function renameSavedCase(caseId, newTitle) {
     const cleanTitle = (newTitle || '').trim();
     if (!cleanTitle) return getSavedCases();
     const list = getSavedCases().map(c => {
       if (c.id === caseId) {
-        return Object.assign({}, c, { title: cleanTitle });
+        return Object.assign({}, c, {
+          title: cleanTitle,
+          updatedAt: new Date().toISOString()
+        });
       }
       return c;
     });
@@ -489,16 +664,29 @@ window.FaraidApp = (function () {
     return list;
   }
 
+  function updateSavedBadges(count) {
+    const realCount = typeof count === 'number' ? count : getSavedCases().length;
+    const badges = document.querySelectorAll('#saved-cases-badge, .saved-cases-badge, [data-saved-badge]');
+    badges.forEach(el => {
+      el.textContent = realCount;
+    });
+  }
+
+  function refreshHomeSavedUI() {
+    if (typeof window.refreshHomeCardsFromStorage === 'function') {
+      window.refreshHomeCardsFromStorage();
+    }
+  }
+
   function loadCaseForAction(caseId, actionType) {
     const item = getSavedCaseById(caseId);
     if (!item) return;
 
-    if (item.estate) {
-      setEstateData(item.estate);
-    }
+    const estate = item.estateData || item.estate || defaultEstate;
+    setEstateData(estate);
 
     if (actionType === 'view' || item.status === 'completed') {
-      const res = calculateFaraid(item.estate || defaultEstate, item.heirs || defaultHeirs);
+      const res = item.resultData || calculateFaraid(estate, item.heirs || defaultHeirs);
       setResultData(res);
       navigateTo('keputusan.html');
     } else {
@@ -509,13 +697,17 @@ window.FaraidApp = (function () {
   function shareSavedCase(caseId) {
     const item = getSavedCaseById(caseId);
     if (!item) return;
-    const netFormatted = formatRM(item.estate ? item.estate.net : (item.net || 0));
+    const netVal = typeof item.netEstate === 'number'
+      ? item.netEstate
+      : (item.estate ? item.estate.net : (item.net || 0));
+    const netFormatted = formatRM(netVal);
+    const heirCount = typeof item.heirCount === 'number' ? item.heirCount : (item.totalHeirCount || 0);
     const title = `Simulasi Faraid: ${item.title}`;
     const text = `Ringkasan Simulasi Faraid Malaysia (Mazhab Shafi'i)\n` +
       `Kes: ${item.title}\n` +
       `Status: ${item.status === 'completed' ? 'Selesai' : 'Draf'}\n` +
       `Baki Harta Bersih: RM ${netFormatted}\n` +
-      `Jumlah Waris: ${item.totalHeirCount || item.heirCount || 0} Orang\n` +
+      `Jumlah Waris: ${heirCount} Orang\n` +
       `Perincian: ${item.summary || 'Formula Ashabul Furud & Asabah'}\n\n` +
       `Rujukan awal mengikut hukum Syarak dan perundangan syariah di Malaysia.`;
     share(title, text);
@@ -523,6 +715,8 @@ window.FaraidApp = (function () {
 
   function renderSavedCasesListHtml() {
     const cases = getSavedCases();
+    updateSavedBadges(cases.length);
+
     if (!cases || cases.length === 0) {
       return `
         <div class="p-6 text-center text-on-surface-variant space-y-2">
@@ -536,14 +730,23 @@ window.FaraidApp = (function () {
       const isCompleted = c.status === 'completed';
       const badgeClass = isCompleted ? 'bg-primary-fixed text-primary' : 'bg-secondary-fixed text-secondary';
       const badgeText = isCompleted ? 'Selesai Ditapis' : 'Draf';
-      const netVal = c.estate ? c.estate.net : (c.net || 0);
+      const netVal = typeof c.netEstate === 'number'
+        ? c.netEstate
+        : (c.estate ? c.estate.net : (c.net || 0));
       const netStr = formatRM(netVal);
-      const heirCount = c.totalHeirCount || c.heirCount || 0;
+      const heirCount = typeof c.heirCount === 'number' ? c.heirCount : (c.totalHeirCount || 0);
+      const dateStr = c.date || (c.createdAt ? new Date(c.createdAt).toLocaleDateString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric' }) : '');
+
       return `
-        <div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm border border-surface-variant">
+        <div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm border border-surface-variant relative">
           <div class="flex items-center justify-between">
             <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full ${badgeClass} font-bold">${badgeText}</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">${c.date || ''}</span>
+            <div class="flex items-center gap-2">
+              <span class="font-body-sm text-body-sm text-on-surface-variant">${dateStr}</span>
+              <button onclick="event.stopPropagation(); FaraidApp.deleteCase('${c.id}');" class="text-on-surface-variant hover:text-error p-1 rounded-full transition-colors" title="Padam kes" aria-label="Padam kes">
+                <span class="material-symbols-outlined text-[18px]">delete</span>
+              </button>
+            </div>
           </div>
           <h4 class="font-label-lg text-label-lg font-bold text-on-surface mt-1">${c.title}</h4>
           <p class="font-body-sm text-body-sm text-on-surface-variant">Baki Harta: <strong>RM ${netStr}</strong> • ${heirCount} Waris</p>
@@ -557,6 +760,7 @@ window.FaraidApp = (function () {
   }
 
   function showSavedModal() {
+    updateSavedBadges();
     let modal = document.getElementById('saved-cases-modal');
     if (!modal) {
       modal = document.createElement('div');
@@ -679,6 +883,7 @@ window.FaraidApp = (function () {
   }
 
   return {
+    SAVED_CASES_KEY,
     getEstateData,
     setEstateData,
     getResultData,
@@ -693,8 +898,13 @@ window.FaraidApp = (function () {
     loadSampleCase,
     getSavedCases,
     setSavedCases,
-    getSavedCaseById,
+    saveCase,
+    deleteCase,
     deleteSavedCase,
+    createCaseFromCurrentState,
+    updateSavedBadges,
+    renderSavedCasesListHtml,
+    getSavedCaseById,
     renameSavedCase,
     loadCaseForAction,
     shareSavedCase,
@@ -711,6 +921,16 @@ window.FaraidApp = (function () {
     defaultUserPrefs
   };
 })();
+
+// Global convenience bindings
+if (typeof window !== 'undefined' && window.FaraidApp) {
+  window.SAVED_CASES_KEY = window.FaraidApp.SAVED_CASES_KEY;
+  window.getSavedCases = window.FaraidApp.getSavedCases;
+  window.saveCase = window.FaraidApp.saveCase;
+  window.deleteCase = window.FaraidApp.deleteCase;
+  window.deleteSavedCase = window.FaraidApp.deleteSavedCase;
+  window.createCaseFromCurrentState = window.FaraidApp.createCaseFromCurrentState;
+}
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function () {

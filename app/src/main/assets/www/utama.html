@@ -89,12 +89,12 @@
 </div>
 </a>
 <!-- Shortcut 3: Kes Tersimpan -->
-<a class="group flex flex-col justify-between p-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container shadow-sm transition-all" href="#">
+<a class="group flex flex-col justify-between p-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container shadow-sm transition-all" data-path="tersimpan" href="#" onclick="if(window.FaraidApp){window.FaraidApp.showSavedModal();return false;}">
 <div class="flex items-center justify-between mb-2">
 <div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary transition-transform group-hover:scale-105">
 <span class="material-symbols-outlined text-[22px]">bookmark</span>
 </div>
-<span class="px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">3</span>
+<span id="saved-cases-badge" class="saved-cases-badge px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">0</span>
 </div>
 <div>
 <span class="font-label-md text-label-md font-bold text-on-surface block group-hover:text-primary transition-colors">Kes Tersimpan</span>
@@ -728,37 +728,98 @@
     function syncCardsWithStorage() {
       if (!window.FaraidApp || !recentCardsContainer) return;
       const cases = window.FaraidApp.getSavedCases();
-      const caseIds = new Set(cases.map(c => c.id));
       
-      const cards = recentCardsContainer.querySelectorAll('[data-case-id]');
-      cards.forEach(card => {
-        const id = card.dataset.caseId;
-        if (!caseIds.has(id)) {
-          card.remove();
-        } else {
-          const matching = cases.find(c => c.id === id);
-          if (matching) {
-            card.dataset.caseTitle = matching.title;
-            const titleEl = card.querySelector('.case-title');
-            if (titleEl) titleEl.textContent = matching.title;
-          }
+      // Update badge count
+      if (typeof window.FaraidApp.updateSavedBadges === 'function') {
+        window.FaraidApp.updateSavedBadges(cases.length);
+      }
+
+      if (!cases || cases.length === 0) {
+        recentCardsContainer.innerHTML = '';
+        if (noRecentCardsState) {
+          recentCardsContainer.appendChild(noRecentCardsState);
+          noRecentCardsState.classList.remove('hidden');
+          noRecentCardsState.classList.add('flex');
         }
-      });
+        return;
+      }
 
-      updateEmptyState();
-    }
-
-    function updateEmptyState() {
-      if (!recentCardsContainer || !noRecentCardsState) return;
-      const visibleCards = recentCardsContainer.querySelectorAll('[data-case-id]');
-      if (visibleCards.length === 0) {
-        noRecentCardsState.classList.remove('hidden');
-        noRecentCardsState.classList.add('flex');
-      } else {
+      if (noRecentCardsState) {
         noRecentCardsState.classList.add('hidden');
         noRecentCardsState.classList.remove('flex');
       }
+
+      const cardsHtml = cases.map(c => {
+        const isCompleted = c.status === 'completed';
+        const badgeClass = isCompleted ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-secondary-fixed text-on-secondary-fixed-variant';
+        const badgeIcon = isCompleted ? 'check_circle' : 'edit_note';
+        const badgeText = isCompleted ? 'Selesai' : 'Draf';
+        const netVal = typeof c.netEstate === 'number'
+          ? c.netEstate
+          : (c.estate ? c.estate.net : (c.net || 0));
+        const netFormatted = window.FaraidApp.formatRM(netVal);
+        const heirCount = typeof c.heirCount === 'number' ? c.heirCount : (c.totalHeirCount || 0);
+        const dateStr = c.date || (c.createdAt ? new Date(c.createdAt).toLocaleDateString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric' }) : '');
+
+        let summaryPill = '';
+        if (c.summary) {
+          summaryPill = `<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate max-w-[240px]"><span class="material-symbols-outlined text-[16px] text-primary">group</span>${c.summary}</span>`;
+        } else if (c.resultData && Array.isArray(c.resultData.shares)) {
+          const names = c.resultData.shares.map(s => s.title).join(', ');
+          summaryPill = `<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate max-w-[240px]"><span class="material-symbols-outlined text-[16px] text-primary">group</span>${names}</span>`;
+        } else {
+          summaryPill = `<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-primary">group</span>${heirCount} Waris Berhak</span>`;
+        }
+
+        return `
+          <div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm space-y-3 transition-all duration-300" data-case-id="${c.id}" data-status="${c.status}" data-case-title="${c.title}">
+            <div class="flex items-start justify-between">
+              <div class="space-y-0.5">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-full ${badgeClass} font-label-sm text-label-sm font-bold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[12px]">${badgeIcon}</span> ${badgeText}
+                  </span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant case-date">${dateStr}</span>
+                </div>
+                <h4 class="font-headline-sm text-headline-sm font-bold text-on-surface pt-1 case-title">
+                  ${c.title}
+                </h4>
+              </div>
+              <button aria-label="Menu pilihan untuk ${c.title}" data-action="more" data-case-id="${c.id}" data-status="${c.status}" class="text-on-surface-variant p-2 -mr-1 rounded-full hover:bg-surface-container active:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined text-[20px] pointer-events-none">more_vert</span>
+              </button>
+            </div>
+            <div class="bg-surface-container-low rounded-xl p-3 flex items-center justify-between">
+              <div>
+                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-medium">${isCompleted ? 'Harta Bersih' : 'Harta Bersih Anggaran'}</span>
+                <div class="font-currency-display text-currency-display font-bold text-primary tracking-tight">
+                  RM ${netFormatted}
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="font-label-sm text-label-sm text-on-surface-variant block">${isCompleted ? 'Jumlah Waris' : 'Waris Disenarai'}</span>
+                <span class="font-label-lg text-label-lg font-bold text-on-surface">${heirCount} Orang</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              ${summaryPill}
+              <button onclick="FaraidApp.loadCaseForAction('${c.id}', '${isCompleted ? 'view' : 'continue'}')" class="font-label-sm text-label-sm font-bold text-primary flex items-center hover:underline">
+                ${isCompleted ? 'Buka Ringkasan' : 'Sambung Kira'}
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      recentCardsContainer.innerHTML = cardsHtml;
+      if (noRecentCardsState) {
+        recentCardsContainer.appendChild(noRecentCardsState);
+      }
     }
+
+    window.refreshHomeCardsFromStorage = syncCardsWithStorage;
+    window.addEventListener('pageshow', syncCardsWithStorage);
 
     function openSheet(caseId, status, cardEl) {
       activeCaseId = caseId;
