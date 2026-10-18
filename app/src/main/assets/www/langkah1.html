@@ -180,15 +180,15 @@
 </div>
 <!-- Formula breakdown capsule -->
 <div class="pt-1">
-<div class="inline-flex items-center flex-wrap gap-1 bg-surface-container-highest/20 text-on-primary px-2.5 py-1.5 rounded-lg text-body-sm font-body-sm">
+<div class="inline-flex items-center flex-wrap gap-1 bg-surface-container-highest/20 text-on-primary px-2.5 py-1.5 rounded-lg text-body-sm font-body-sm" id="formulaBreakdown">
 <span class="opacity-90">Pengiraan:</span>
-<span class="font-semibold">RM 550k</span>
+<span class="font-semibold" id="calcGross">RM 550k</span>
 <span class="opacity-60">−</span>
-<span>5k <span class="text-[10px] opacity-80">(Jenazah)</span></span>
+<span><span id="calcFuneral">5k</span> <span class="text-[10px] opacity-80">(Jenazah)</span></span>
 <span class="opacity-60">−</span>
-<span>30k <span class="text-[10px] opacity-80">(Hutang)</span></span>
+<span><span id="calcDebt">30k</span> <span class="text-[10px] opacity-80">(Hutang)</span></span>
 <span class="opacity-60">−</span>
-<span>15k <span class="text-[10px] opacity-80">(Wasiat)</span></span>
+<span><span id="calcWasiat">15k</span> <span class="text-[10px] opacity-80">(Wasiat)</span></span>
 </div>
 </div>
 </div>
@@ -218,23 +218,39 @@
 
     function parseVal(str) {
       if (!str) return 0;
-      const clean = str.replace(/[^0-9.]/g, '');
+      const clean = str.toString().replace(/[^0-9.]/g, '');
       const parsed = parseFloat(clean);
       return isNaN(parsed) ? 0 : parsed;
     }
 
     function formatCurrency(num) {
-      return num.toLocaleString('en-MY', {
+      return (num || 0).toLocaleString('en-MY', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
+    }
+
+    function formatCompact(num) {
+      const n = Math.abs(num || 0);
+      if (n === 0) return '0';
+      if (n >= 1000000) {
+        const val = n / 1000000;
+        const formatted = (val % 1 === 0) ? val.toFixed(0) : val.toFixed(2).replace(/\.?0+$/, '');
+        return formatted + 'm';
+      }
+      if (n >= 1000) {
+        const val = n / 1000;
+        const formatted = (val % 1 === 0) ? val.toFixed(0) : val.toFixed(1).replace(/\.?0+$/, '');
+        return formatted + 'k';
+      }
+      return n.toLocaleString('en-MY');
     }
 
     function recalculate() {
       const gross = parseVal(grossInput.value);
       const funeral = parseVal(funeralInput.value);
       const debt = parseVal(debtInput.value);
-      let wasiat = parseVal(wasiatInput.value);
+      const wasiat = parseVal(wasiatInput.value);
 
       const postDebt = Math.max(0, gross - funeral - debt);
       const maxAllowedWasiat = postDebt / 3;
@@ -252,6 +268,34 @@
       const net = Math.max(0, postDebt - wasiat);
       if (netDisplay) {
         netDisplay.textContent = formatCurrency(net);
+      }
+
+      // Update breakdown capsule
+      const calcGross = document.getElementById('calcGross');
+      const calcFuneral = document.getElementById('calcFuneral');
+      const calcDebt = document.getElementById('calcDebt');
+      const calcWasiat = document.getElementById('calcWasiat');
+
+      if (calcGross) calcGross.textContent = 'RM ' + formatCompact(gross);
+      if (calcFuneral) calcFuneral.textContent = formatCompact(funeral);
+      if (calcDebt) calcDebt.textContent = formatCompact(debt);
+      if (calcWasiat) calcWasiat.textContent = formatCompact(wasiat);
+    }
+
+    function loadSavedEstate() {
+      try {
+        const stored = (window.FaraidApp && typeof window.FaraidApp.getEstateData === 'function')
+          ? window.FaraidApp.getEstateData()
+          : JSON.parse(localStorage.getItem('faraid_estate_data') || 'null');
+
+        if (stored && typeof stored.gross === 'number' && stored.gross > 0) {
+          grossInput.value = formatCurrency(stored.gross);
+          funeralInput.value = formatCurrency(stored.funeral || 0);
+          debtInput.value = formatCurrency(stored.debt || 0);
+          wasiatInput.value = formatCurrency(stored.wasiat || 0);
+        }
+      } catch (e) {
+        console.warn('Could not load saved estate data:', e);
       }
     }
 
@@ -290,6 +334,7 @@
             wasiat: parseVal(wasiatInput.value),
             net: net
           });
+        }
         if (window.FaraidApp && typeof window.FaraidApp.navigateTo === 'function') {
           window.FaraidApp.navigateTo('langkah2.html');
         } else {
@@ -298,6 +343,7 @@
       });
     }
 
+    loadSavedEstate();
     recalculate();
   })();
 </script><script src="faraid_app.js"></script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(26,32,44,0.06)]" data-active-classes="[&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold"><div class="flex justify-around items-center h-20 px-space-xs max-w-md mx-auto"><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="utama" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">home</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Utama<span class="block text-[9px] font-normal opacity-80 leading-none">Home</span></span></a><a aria-current="page" class="group flex flex-col items-center justify-center gap-1 w-20 py-1 transition-all select-none [&amp;_.indicator]:bg-tertiary-fixed [&amp;_.indicator]:text-primary text-primary font-semibold" data-path="simulasi" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">calculate</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Simulasi<span class="block text-[9px] font-normal opacity-80 leading-none">Simulate</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="panduan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">menu_book</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Panduan<span class="block text-[9px] font-normal opacity-80 leading-none">Learn</span></span></a><a class="group flex flex-col items-center justify-center gap-1 w-20 py-1 text-on-surface-variant hover:text-on-surface transition-all select-none" data-path="tersimpan" href="#"><div class="indicator w-14 h-8 rounded-full flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[24px]">bookmark</span></div><span class="font-label-sm text-label-sm text-center leading-tight tracking-tight">Tersimpan<span class="block text-[9px] font-normal opacity-80 leading-none">Saved</span></span></a></div></nav></body></html>
